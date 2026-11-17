@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuestra Boda — Alianza Mágica & Galáctica</title>
+
+    <!-- Tipografías editoriales elegantes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+    <!-- Marco ornamental fijo (puedes sustituirlo por tus propias imágenes de esquina en PNG) -->
+    <div class="page-frame" aria-hidden="true">
+        <svg class="corner-ornament corner-tl" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="16" stroke="#5C4938" stroke-width="1.5" fill="#FCFBF9" />
+            <path d="M12 28 H44 M28 12 V44" stroke="#5C4938" stroke-width="1" />
+            <circle cx="22" cy="22" r="4" stroke="#5C4938" stroke-width="1" />
+            <path d="M44 28 C70 28, 85 15, 115 28" stroke="#5C4938" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M28 44 C28 70, 15 85, 28 115" stroke="#5C4938" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M48 16 L50 21 L55 23 L50 25 L48 30 L46 25 L41 23 L46 21 Z" fill="#5C4938" />
+        </svg>
+
+        <svg class="corner-ornament corner-tr" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="16" stroke="#5C4938" stroke-width="1.5" fill="#FCFBF9" />
+            <path d="M12 28 H44 M28 12 V44" stroke="#5C4938" stroke-width="1" />
+            <circle cx="22" cy="22" r="4" stroke="#5C4938" stroke-width="1" />
+            <path d="M44 28 C70 28, 85 15, 115 28" stroke="#5C4938" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M28 44 C28 70, 15 85, 28 115" stroke="#5C4938" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M48 16 L50 21 L55 23 L50 25 L48 30 L46 25 L41 23 L46 21 Z" fill="#5C4938" />
+        </svg>
+
+        <svg class="corner-ornament corner-bl" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="16" stroke="#5C4938" stroke-width="1.5" fill="#FCFBF9" />
+            <path d="M12 28 H44 M28 12 V44" stroke="#5C4938" stroke-width="1" />
+            <circle cx="22" cy="22" r="4" stroke="#5C4938" stroke-width="1" />
+            <path d="M44 28 C70 28, 85 15, 115 28" stroke="#5C4938" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M28 44 C28 70, 15 85, 28 115" stroke="#5C4938" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+
+        <svg class="corner-ornament corner-br" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="16" stroke="#5C4938" stroke-width="1.5" fill="#FCFBF9" />
+            <path d="M12 28 H44 M28 12 V44" stroke="#5C4938" stroke-width="1" />
+            <circle cx="22" cy="22" r="4" stroke="#5C4938" stroke-width="1" />
+            <path d="M44 28 C70 28, 85 15, 115 28" stroke="#5C4938" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M28 44 C28 70, 15 85, 28 115" stroke="#5C4938" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+    </div>
+
+    <!-- Navegación -->
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#evento">El Gran Día</a>
+        <a href="#mesas">Buscador de Mesas</a>
+        <a href="#pensadero">El Pensadero</a>
+        <a href="#asistencia">Confirmar</a>
+    </nav>
+
+    <!-- Cabecera Principal -->
+    <header id="inicio">
+        <p class="subtitle">Una alianza entre la Fuerza y la Magia</p>
+        <h1>Maitane &amp; Javier</h1>
+        <p class="date-banner">17 · Noviembre · 2026</p>
+
+        <div class="countdown" id="countdown">
+            <div class="count-item"><span class="count-num" id="days">00</span><span class="count-label">Días</span>
+            </div>
+            <div class="count-item"><span class="count-num" id="hours">00</span><span class="count-label">Horas</span>
+            </div>
+            <div class="count-item"><span class="count-num" id="minutes">00</span><span class="count-label">Min</span>
+            </div>
+            <div class="count-item"><span class="count-num" id="seconds">00</span><span class="count-label">Seg</span>
+            </div>
+        </div>
+
+        <div class="divider"><span>✦</span></div>
+    </header>
+
+    <main>
+
+        <!-- Sección 1: Ceremonia y Celebración -->
+        <section id="evento">
+            <h2>El Gran Día</h2>
+            <p class="section-intro">
+                Nos hace muchísima ilusión compartir con vosotros este capítulo tan especial de nuestra historia. Aquí
+                tenéis las coordenadas para no perderos en la galaxia.
+            </p>
+
+            <div class="cards-grid">
+                <article class="paper-card">
+                    <h3>La Ceremonia</h3>
+                    <p class="card-time">12:30 Horas</p>
+                    <p class="card-detail">Jardines del Gran Salón<br>Calle de la Alianza, 42 — Madrid</p>
+                    <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-outline">Ver Mapa</a>
+                </article>
+
+                <article class="paper-card">
+                    <h3>El Banquete</h3>
+                    <p class="card-time">14:30 Horas</p>
+                    <p class="card-detail">Finca El Bosque Encantado<br>Carretera de las Estrellas, km 12</p>
+                    <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-outline">Cómo Llegar</a>
+                </article>
+            </div>
+        </section>
+
+        <div class="divider"><span>✦</span></div>
+
+        <!-- Sección 2: Buscador de Mesas -->
+        <section id="mesas">
+            <h2>¿Cuál es tu mesa?</h2>
+            <p class="section-intro">
+                Escribe tu nombre para descubrir a qué facción, reino o universo perteneces en el banquete.
+            </p>
+
+            <div class="seating-box">
+                <input type="text" id="guestSearch" class="search-input"
+                    placeholder="Escribe tu nombre (ej. Aitana, Carlos, Adriana, Pita...)" autocomplete="off" />
+                <div id="searchResults" class="search-results">
+                    <p class="empty-msg">Empieza a escribir tu nombre para revelar tu mesa...</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"><span>✦</span></div>
+
+        <!-- Sección 3: El Pensadero -->
+        <section id="pensadero">
+            <h2>Captura la magia del Gran Día</h2>
+            <div class="pensieve-box">
+                <p class="section-intro">
+                    Sube tus fotos y vídeos a nuestro <strong>Pensadero</strong> compartido para guardar estos recuerdos
+                    para siempre.
+                </p>
+                <a href="#" target="_blank" rel="noopener" class="btn-solid">Subir fotos al Pensadero</a>
+            </div>
+        </section>
+
+        <div class="divider"><span>✦</span></div>
+
+        <!-- Sección 4: Confirmación de Asistencia (RSVP) -->
+        <section id="asistencia">
+            <h2>Confirmación de Asistencia</h2>
+            <p class="section-intro">
+                Por favor, confírmanos tu asistencia antes del 1 de noviembre para preparar vuestro sitio en la mesa.
+            </p>
+
+            <div class="paper-card rsvp-card">
+                <form id="rsvpForm">
+                    <!-- Nombre y Apellidos del Invitado -->
+                    <div class="form-group">
+                        <label>Nombre y Apellidos del Invitado *</label>
+                        <div style="display: flex; gap: 10px;">
+                            <div style="flex: 1;">
+                                <input type="text" id="guestName" required placeholder="Nombre" />
+                            </div>
+                            <div style="flex: 1;">
+                                <input type="text" id="guestLastName" required placeholder="Apellido" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Intolerancias -->
+                    <div class="form-group">
+                        <label for="allergies">Intolerancias, alergias o dietas especiales *</label>
+                        <select id="allergies" required>
+                            <option value="" disabled selected>Seleccione...</option>
+                            <option value="Ninguna">Ninguna</option>
+                            <option value="Celiaca">Celíaca</option>
+                            <option value="Vegetariana">Vegetariana</option>
+                            <option value="Vegana">Vegana</option>
+                            <option value="Otra">Otra (especificar en notas)</option>
+                        </select>
+                    </div>
+
+                    <!-- ¿Nos acompañas? (Radio buttons) -->
+                    <div class="form-group">
+                        <label>¿Nos acompañas en nuestro gran día? *</label>
+                        <div style="margin-top: 8px;">
+                            <label style="font-weight: normal; display: block; margin-bottom: 6px; cursor: pointer;">
+                                <input type="radio" name="attendance" value="Sí" required /> ¡Acepto la misión! Allí
+                                estaré
+                            </label>
+                            <label style="font-weight: normal; display: block; cursor: pointer;">
+                                <input type="radio" name="attendance" value="No" required /> 🌌 Lamentablemente, la
+                                Fuerza no me acompaña esta vez
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Canción -->
+                    <div class="form-group">
+                        <label for="song">Canción que no puede faltar en la fiesta</label>
+                        <input type="text" id="song" placeholder="Artista y título..." />
+                    </div>
+
+                    <hr style="border: none; border-top: 1px solid var(--border-soft); margin: 24px 0;" />
+
+                    <!-- Acompañante -->
+                    <div class="form-group">
+                        <label>¿Vienes con acompañante? *</label>
+                        <div style="margin-top: 8px;">
+                            <label
+                                style="font-weight: normal; display: inline-block; margin-right: 20px; cursor: pointer;">
+                                <input type="radio" name="hasCompanion" value="Sí" id="companionYes" /> Sí
+                            </label>
+                            <label style="font-weight: normal; display: inline-block; cursor: pointer;">
+                                <input type="radio" name="hasCompanion" value="No" id="companionNo" checked /> No
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Datos del acompañante (Ocultos por defecto si dice que No) -->
+                    <div id="companionSection"
+                        style="display: none; border-left: 2px solid var(--ink-sepia); padding-left: 14px; margin-top: 16px;">
+                        <div class="form-group">
+                            <label>Nombre y Apellidos del acompañante</label>
+                            <div style="display: flex; gap: 10px;">
+                                <div style="flex: 1;">
+                                    <input type="text" id="companionName" placeholder="Nombre" />
+                                </div>
+                                <div style="flex: 1;">
+                                    <input type="text" id="companionLastName" placeholder="Apellido" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="companionAllergies">Intolerancias, alergias o dietas especiales del
+                                acompañante</label>
+                            <select id="companionAllergies">
+                                <option value="" disabled selected>Seleccione...</option>
+                                <option value="Ninguna">Ninguna</option>
+                                <option value="Celiaca">Celíaca</option>
+                                <option value="Vegetariana">Vegetariana</option>
+                                <option value="Vegana">Vegana</option>
+                                <option value="Otra">Otra</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-solid full-width" id="submitBtn"
+                        style="margin-top: 16px;">Enviar</button>
+                    <p id="rsvpFeedback" class="feedback-msg"></p>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Maitane &amp; Javier · Con todo nuestro cariño</p>
+    </footer>
+
+    <script>
+        // =========================================
+        // 1. CUENTA ATRÁS (Cambia la fecha aquí)
+        // =========================================
+        const weddingDate = new Date("2027-04-03T12:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
+
+            if (diff <= 0) {
+                document.getElementById("countdown").innerHTML = "<p class='date-banner'>¡Hoy es el Gran Día!</p>";
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = String(d).padStart(2, "0");
+            document.getElementById("hours").textContent = String(h).padStart(2, "0");
+            document.getElementById("minutes").textContent = String(m).padStart(2, "0");
+            document.getElementById("seconds").textContent = String(s).padStart(2, "0");
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // =========================================
+        // 2. BUSCADOR DE MESAS (Meseros reales)
+        // =========================================
+        const tablesData = [
+            { table: "Capitolio", saga: "Los Juegos del Hambre", guests: ["Javier", "Mai"] },
+            { table: "Elfos Domésticos", saga: "Harry Potter", guests: ["Aitana", "Lara", "Alejandro", "Leire", "Arya", "Natalia", "Dani", "Pablo", "Elea", "Sandra", "Emma", "Sara"] },
+            { table: "Alianza Rebelde", saga: "Star Wars", guests: ["Aitana", "Mª Jesús", "Antonio", "Yaya", "Ares", "Yayo", "El Pájaro", "Juan Ignacio", "Leyre"] },
+            { table: "La Orden del Fénix", saga: "Harry Potter", guests: ["Adriana", "Cris", "Guille", "Helena", "Isa", "Luis", "Mari", "Raúl", "Virgilio"] },
+            { table: "Imperio Galáctico", saga: "Star Wars", guests: ["Encar", "Félix", "Maite", "Ana Tere", "Nines", "Manolín", "Jose", "El Mafias", "Lolo", "Tere", "Uwe", "Susana"] },
+            { table: "Hyrule", saga: "The Legend of Zelda", guests: ["Andreita", "Nines", "Lorena", "Uwe", "Lucas", "Rubén", "Ainara", "Iker", "Itziar", "Ariadna", "Jose Manuel", "Javi", "Sandra", "Nacho", "Novia Javi", "Novio Itziar"] },
+            { table: "The Big Bang Theory", saga: "The Big Bang Theory", guests: ["Almu", "Carlos", "Bebé de Almu y Carlos", "Elea", "Irene", "Liu", "Patri", "Nuri", "Javi", "Ewa", "Marcos"] },
+            { table: "The Matrix", saga: "Matrix", guests: ["Ana", "Antonio", "Carlos", "Cris", "Jorge", "Luis", "Marcos", "Novia Yisus", "Olga", "Yisus"] },
+            { table: "Battlestar Galáctica", saga: "BSG 75", guests: ["Carlos", "David", "Iván", "Marta", "Verónica", "Javi Joven", "Laura", "Álvaro", "Javi Viejo", "Miguel", "Carlos Ródenas", "Novia Carlos"] },
+            { table: "Dune", saga: "Arrakis", guests: ["Cris", "Rubén", "Óscar", "Nacho", "Cheli", "Felixín", "Nachete", "Gema", "Belén", "Miriam", "Jose", "Maite"] },
+            { table: "Gondor", saga: "El Señor de los Anillos", guests: ["Invitados de Gondor"] },
+            { table: "Los Mercenarios", saga: "Expendables", guests: ["Pita", "Novia Pita", "Nacho", "Ainhoa", "Fátima", "Jose"] }
+        ];
+
+        const searchInput = document.getElementById("guestSearch");
+        const resultsContainer = document.getElementById("searchResults");
+
+        function normalizeText(str) {
+            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+        }
+
+        searchInput.addEventListener("input", (e) => {
+            const query = normalizeText(e.target.value);
+            if (query.length < 2) {
+                resultsContainer.innerHTML = '<p class="empty-msg">Empieza a escribir tu nombre para revelar tu mesa...</p>';
+                return;
+            }
+
+            const matches = [];
+            tablesData.forEach(item => {
+                item.guests.forEach(guest => {
+                    if (normalizeText(guest).includes(query)) {
+                        matches.push({ guest, table: item.table, saga: item.saga });
+                    }
+                });
+            });
+
+            if (matches.length === 0) {
+                resultsContainer.innerHTML = '<p class="empty-msg">No hemos encontrado ese nombre. Prueba con otro apodo o nombre de pila.</p>';
+                return;
+            }
+
+            resultsContainer.innerHTML = matches.map(m => `
+        <div class="result-card">
+          <p class="result-guest">${m.guest}</p>
+          <p class="result-table">Mesa: ${m.table}</p>
+          <p class="result-saga">Universo: ${m.saga}</p>
+        </div>
+      `).join("");
+        });
+
+        // =========================================
+        // 3. FORMULARIO RSVP -> GOOGLE SHEETS
+        // =========================================
+        const scriptURL = 'PEGAR_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT';
+
+        document.getElementById("rsvpForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById("submitBtn");
+            const feedback = document.getElementById("rsvpFeedback");
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Enviando lechuza...";
+            feedback.style.display = "block";
+            feedback.style.color = "var(--ink-sepia)";
+            feedback.textContent = "Transmitiendo datos a la Orden...";
+
+            const formData = {
+                nombre: document.getElementById("guestName").value,
+                asistencia: document.getElementById("attendance").value,
+                alergias: document.getElementById("allergies").value || "Ninguna"
+            };
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+                .then(() => {
+                    feedback.textContent = `¡Muchas gracias, ${formData.nombre}! Tu confirmación se ha registrado con éxito.`;
+                    this.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Enviar Confirmación";
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    feedback.style.color = "#a94442";
+                    feedback.textContent = "Hubo un pequeño error en la red galáctica. Por favor, inténtalo de nuevo.";
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Enviar Confirmación";
+                });
+        });
+    </script>
+</body>
+
+</html>

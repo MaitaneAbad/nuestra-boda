@@ -12,12 +12,83 @@
             href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
             rel="stylesheet"
         />
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet" />
 
         <!-- Hoja de estilos -->
         <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/pruebas.css" />
     </head>
 
     <body>
+        <!-- Invitación Tríptico 3D a Pantalla Completa -->
+        <div id="gatefoldOverlay" class="gatefold-overlay">
+            <div class="gatefold-scene" id="gatefoldScene">
+                <!-- Fondo interior revelado al abrir las puertas y solapas -->
+                <div class="gatefold-inner-bg">
+                    <div class="inner-reveal-card">
+                        <p class="inner-subtitle">Una alianza entre la Fuerza y la Magia</p>
+                        <h2 class="inner-names">Maitane &amp; Javier</h2>
+                        <p class="inner-date">03 · Abril · 2027</p>
+                    </div>
+                </div>
+
+                <!-- Puertas laterales izquierda y derecha (se abren primero en 3D) -->
+                <div class="door door-left">
+                    <div class="door-content">
+                        <img src="img/esquina.png" alt="" class="door-corner door-corner-tl" />
+                        <img src="img/esquina.png" alt="" class="door-corner door-corner-bl" />
+                        <span class="door-half-title left">Maitane</span>
+                    </div>
+                </div>
+
+                <div class="door door-right">
+                    <div class="door-content">
+                        <img src="img/esquina.png" alt="" class="door-corner door-corner-tr" />
+                        <img src="img/esquina.png" alt="" class="door-corner door-corner-br" />
+                        <span class="door-half-title right">Javier</span>
+                    </div>
+                </div>
+
+                <!-- Botón central con vuestro sello -->
+                <button type="button" id="openGatefoldBtn" class="center-seal-trigger" aria-label="Abrir invitación">
+                    <img src="img/sello-1.png" alt="Abrir invitación" class="center-seal-img" />
+                    <span class="center-seal-label">Pulsa para abrir</span>
+                </button>
+            </div>
+        </div>
+        <!-- <script>
+            (function () {
+                const btn = document.getElementById('openGatefoldBtn');
+                const scene = document.getElementById('gatefoldScene');
+                const overlay = document.getElementById('gatefoldOverlay');
+                const xwing = document.querySelector('.xwing-container');
+
+                if (!btn || !scene || !overlay) return;
+
+                btn.addEventListener('click', function () {
+                    // 1. Abren muy lentamente las puertas laterales en 3D (6.5s)
+                    scene.classList.add('doors-open');
+
+                    // 2. A los 2.0s, el interior empieza a aparecer poco a poco mientras hace zoom
+                    setTimeout(() => {
+                        scene.classList.add('zoom-in');
+                    }, 2000);
+
+                    // 3. A los 8.2s, se funde suavemente hacia la web principal y arranca la X-Wing
+                    setTimeout(() => {
+                        overlay.classList.add('is-done');
+                        if (xwing) {
+                            xwing.style.animationPlayState = 'running';
+                        }
+                    }, 8200);
+
+                    // 4. Al terminar el fundido (10.5s), se oculta por completo la capa
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                    }, 10500);
+                });
+            })();
+        </script> -->
         <!-- Marco ornamental fijo (puedes sustituirlo por tus propias imágenes de esquina en PNG) -->
         <div class="page-frame" aria-hidden="true">
             <!-- Marcos ornamentales con tu imagen -->
@@ -40,7 +111,7 @@
         <header id="inicio">
             <p class="subtitle">Una alianza entre la Fuerza y la Magia</p>
             <h1>Maitane &amp; Javier</h1>
-            <p class="date-banner">17 · Noviembre · 2026</p>
+            <p class="date-banner">3 · Abril · 2027</p>
 
             <div class="countdown" id="countdown">
                 <div class="count-item">

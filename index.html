@@ -62,6 +62,7 @@
             </div>
         </div>
 
+        <div class="frame-top-mask" aria-hidden="true"></div>
         <!-- Marco ornamental fijo -->
         <div class="page-frame" aria-hidden="true">
             <img src="img/esquina.png" alt="" class="corner-ornament corner-tl" />
@@ -70,221 +71,223 @@
             <img src="img/esquina.png" alt="" class="corner-ornament corner-br" />
         </div>
 
-        <!-- Navegación -->
-        <nav>
-            <a href="#inicio">Inicio</a>
-            <a href="#evento">El Gran Día</a>
-            <a href="#mesas">Buscador de Mesas</a>
-            <a href="#pensadero">El Pensadero</a>
-            <a href="#asistencia">Confirmar</a>
-        </nav>
+        <div class="invitation-scroll-area container">
+            <!-- Navegación -->
+            <nav>
+                <a href="#inicio">Inicio</a>
+                <a href="#evento">El Gran Día</a>
+                <a href="#mesas">Buscador de Mesas</a>
+                <a href="#pensadero">El Pensadero</a>
+                <a href="#asistencia">Confirmar</a>
+            </nav>
 
-        <!-- Cabecera Principal -->
-        <header id="inicio">
-            <p class="subtitle">Una alianza entre la Fuerza y la Magia</p>
-            <h1>Maitane &amp; Javier</h1>
-            <p class="date-banner">3 · Abril · 2027</p>
+            <!-- Cabecera Principal -->
+            <header id="inicio">
+                <p class="subtitle">Una alianza entre la Fuerza y la Magia</p>
+                <h1>Maitane &amp; Javier</h1>
+                <p class="date-banner">3 · Abril · 2027</p>
 
-            <div class="countdown" id="countdown">
-                <div class="count-item">
-                    <span class="count-num" id="days">00</span>
-                    <span class="count-label">Días</span>
-                </div>
-                <div class="count-item">
-                    <span class="count-num" id="hours">00</span>
-                    <span class="count-label">Horas</span>
-                </div>
-                <div class="count-item">
-                    <span class="count-num" id="minutes">00</span>
-                    <span class="count-label">Min</span>
-                </div>
-                <div class="count-item">
-                    <span class="count-num" id="seconds">00</span>
-                    <span class="count-label">Seg</span>
-                </div>
-            </div>
-
-            <div class="divider"><span>✦</span></div>
-        </header>
-
-        <main>
-            <!-- Sección 1: Ceremonia y Celebración -->
-            <section id="evento">
-                <h2>El Gran Día</h2>
-                <p class="section-intro">
-                    Nos hace muchísima ilusión compartir con vosotros este capítulo tan especial de nuestra historia. Aquí tenéis las
-                    coordenadas para no perderos en la galaxia.
-                </p>
-
-                <div class="cards-grid">
-                    <article class="paper-card">
-                        <h3>La Ceremonia</h3>
-                        <p class="card-time">12:30 Horas</p>
-                        <p class="card-detail">
-                            Jardines del Gran Salón
-                            <br />
-                            Calle de la Alianza, 42 — Madrid
-                        </p>
-                        <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-outline">Ver Mapa</a>
-                    </article>
-
-                    <article class="paper-card">
-                        <h3>El Banquete</h3>
-                        <p class="card-time">14:30 Horas</p>
-                        <p class="card-detail">
-                            Finca El Bosque Encantado
-                            <br />
-                            Carretera de las Estrellas, km 12
-                        </p>
-                        <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-outline">Cómo Llegar</a>
-                    </article>
-                </div>
-            </section>
-
-            <div class="divider"><span>✦</span></div>
-
-            <!-- Sección 2: Buscador de Mesas -->
-            <section id="mesas">
-                <h2>¿Cuál es tu mesa?</h2>
-                <p class="section-intro">Escribe tu nombre para descubrir a qué facción, reino o universo perteneces en el banquete.</p>
-
-                <div class="seating-box">
-                    <input
-                        type="text"
-                        id="guestSearch"
-                        class="search-input"
-                        placeholder="Escribe tu nombre (ej. Aitana, Carlos, Adriana, Pita...)"
-                        autocomplete="off"
-                    />
-                    <div id="searchResults" class="search-results">
-                        <p class="empty-msg">Empieza a escribir tu nombre para revelar tu mesa...</p>
+                <div class="countdown" id="countdown">
+                    <div class="count-item">
+                        <span class="count-num" id="days">00</span>
+                        <span class="count-label">Días</span>
+                    </div>
+                    <div class="count-item">
+                        <span class="count-num" id="hours">00</span>
+                        <span class="count-label">Horas</span>
+                    </div>
+                    <div class="count-item">
+                        <span class="count-num" id="minutes">00</span>
+                        <span class="count-label">Min</span>
+                    </div>
+                    <div class="count-item">
+                        <span class="count-num" id="seconds">00</span>
+                        <span class="count-label">Seg</span>
                     </div>
                 </div>
-            </section>
 
-            <div class="divider"><span>✦</span></div>
+                <div class="divider"><span>✦</span></div>
+            </header>
 
-            <!-- Sección 3: El Pensadero -->
-            <section id="pensadero">
-                <h2>Captura la magia del Gran Día</h2>
-                <div class="pensieve-box">
+            <main>
+                <!-- Sección 1: Ceremonia y Celebración -->
+                <section id="evento">
+                    <h2>El Gran Día</h2>
                     <p class="section-intro">
-                        Sube tus fotos y vídeos a nuestro
-                        <strong>Pensadero</strong>
-                        compartido para guardar estos recuerdos para siempre.
+                        Nos hace muchísima ilusión compartir con vosotros este capítulo tan especial de nuestra historia. Aquí tenéis las
+                        coordenadas para no perderos en la galaxia.
                     </p>
-                    <a href="#" target="_blank" rel="noopener" class="btn-solid">Subir fotos al Pensadero</a>
-                </div>
-            </section>
 
-            <div class="divider"><span>✦</span></div>
+                    <div class="cards-grid">
+                        <article class="paper-card">
+                            <h3>La Ceremonia</h3>
+                            <p class="card-time">12:30 Horas</p>
+                            <p class="card-detail">
+                                Jardines del Gran Salón
+                                <br />
+                                Calle de la Alianza, 42 — Madrid
+                            </p>
+                            <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-outline">Ver Mapa</a>
+                        </article>
 
-            <!-- Sección 4: Confirmación de Asistencia (RSVP) -->
-            <section id="asistencia">
-                <h2>Confirmación de Asistencia</h2>
-                <p class="section-intro">
-                    Por favor, confírmanos tu asistencia antes del 1 de noviembre para preparar vuestro sitio en la mesa.
-                </p>
+                        <article class="paper-card">
+                            <h3>El Banquete</h3>
+                            <p class="card-time">14:30 Horas</p>
+                            <p class="card-detail">
+                                Finca El Bosque Encantado
+                                <br />
+                                Carretera de las Estrellas, km 12
+                            </p>
+                            <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-outline">Cómo Llegar</a>
+                        </article>
+                    </div>
+                </section>
 
-                <div class="paper-card rsvp-card">
-                    <form id="rsvpForm">
-                        <div class="form-group">
-                            <label>Nombre y Apellidos del Invitado *</label>
-                            <div class="form-row-2">
-                                <div>
-                                    <input type="text" id="guestName" required placeholder="Nombre" />
-                                </div>
-                                <div>
-                                    <input type="text" id="guestLastName" required placeholder="Apellido" />
-                                </div>
-                            </div>
+                <div class="divider"><span>✦</span></div>
+
+                <!-- Sección 2: Buscador de Mesas -->
+                <section id="mesas">
+                    <h2>¿Cuál es tu mesa?</h2>
+                    <p class="section-intro">Escribe tu nombre para descubrir a qué facción, reino o universo perteneces en el banquete.</p>
+
+                    <div class="seating-box">
+                        <input
+                            type="text"
+                            id="guestSearch"
+                            class="search-input"
+                            placeholder="Escribe tu nombre (ej. Aitana, Carlos, Adriana, Pita...)"
+                            autocomplete="off"
+                        />
+                        <div id="searchResults" class="search-results">
+                            <p class="empty-msg">Empieza a escribir tu nombre para revelar tu mesa...</p>
                         </div>
+                    </div>
+                </section>
 
-                        <div class="form-group">
-                            <label for="allergies">Intolerancias, alergias o dietas especiales *</label>
-                            <select id="allergies" required>
-                                <option value="" disabled selected>Seleccione...</option>
-                                <option value="Ninguna">Ninguna</option>
-                                <option value="Celiaca">Celíaca</option>
-                                <option value="Vegetariana">Vegetariana</option>
-                                <option value="Vegana">Vegana</option>
-                                <option value="Otra">Otra (especificar en notas)</option>
-                            </select>
-                        </div>
+                <div class="divider"><span>✦</span></div>
 
-                        <div class="form-group">
-                            <label>¿Nos acompañas en nuestro gran día? *</label>
-                            <div class="radio-stack">
-                                <label class="radio-option">
-                                    <input type="radio" name="attendance" value="Sí" required />
-                                    ¡Acepto la misión! Allí estaré
-                                </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="attendance" value="No" required />
-                                    🌌 Lamentablemente, la Fuerza no me acompaña esta vez
-                                </label>
-                            </div>
-                        </div>
+                <!-- Sección 3: El Pensadero -->
+                <section id="pensadero">
+                    <h2>Captura la magia del Gran Día</h2>
+                    <div class="pensieve-box">
+                        <p class="section-intro">
+                            Sube tus fotos y vídeos a nuestro
+                            <strong>Pensadero</strong>
+                            compartido para guardar estos recuerdos para siempre.
+                        </p>
+                        <a href="#" target="_blank" rel="noopener" class="btn-solid">Subir fotos al Pensadero</a>
+                    </div>
+                </section>
 
-                        <div class="form-group">
-                            <label for="song">Canción que no puede faltar en la fiesta</label>
-                            <input type="text" id="song" placeholder="Artista y título..." />
-                        </div>
+                <div class="divider"><span>✦</span></div>
 
-                        <hr class="form-divider" />
+                <!-- Sección 4: Confirmación de Asistencia (RSVP) -->
+                <section id="asistencia">
+                    <h2>Confirmación de Asistencia</h2>
+                    <p class="section-intro">
+                        Por favor, confírmanos tu asistencia antes del 1 de noviembre para preparar vuestro sitio en la mesa.
+                    </p>
 
-                        <div class="form-group">
-                            <label>¿Vienes con acompañante? *</label>
-                            <div class="radio-inline">
-                                <label class="radio-option">
-                                    <input type="radio" name="hasCompanion" value="Sí" id="companionYes" />
-                                    Sí
-                                </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="hasCompanion" value="No" id="companionNo" checked />
-                                    No
-                                </label>
-                            </div>
-                        </div>
-
-                        <div id="companionSection" class="companion-panel" style="display: none">
+                    <div class="paper-card rsvp-card">
+                        <form id="rsvpForm">
                             <div class="form-group">
-                                <label>Nombre y Apellidos del acompañante</label>
+                                <label>Nombre y Apellidos del Invitado *</label>
                                 <div class="form-row-2">
                                     <div>
-                                        <input type="text" id="companionName" placeholder="Nombre" />
+                                        <input type="text" id="guestName" required placeholder="Nombre" />
                                     </div>
                                     <div>
-                                        <input type="text" id="companionLastName" placeholder="Apellido" />
+                                        <input type="text" id="guestLastName" required placeholder="Apellido" />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="companionAllergies">Intolerancias, alergias o dietas especiales del acompañante</label>
-                                <select id="companionAllergies">
+                                <label for="allergies">Intolerancias, alergias o dietas especiales *</label>
+                                <select id="allergies" required>
                                     <option value="" disabled selected>Seleccione...</option>
                                     <option value="Ninguna">Ninguna</option>
                                     <option value="Celiaca">Celíaca</option>
                                     <option value="Vegetariana">Vegetariana</option>
                                     <option value="Vegana">Vegana</option>
-                                    <option value="Otra">Otra</option>
+                                    <option value="Otra">Otra (especificar en notas)</option>
                                 </select>
                             </div>
-                        </div>
 
-                        <button type="submit" class="btn-solid full-width" id="submitBtn" style="margin-top: 16px">
-                            Enviar Confirmación
-                        </button>
-                        <p id="rsvpFeedback" class="feedback-msg"></p>
-                    </form>
-                </div>
-            </section>
-        </main>
+                            <div class="form-group">
+                                <label>¿Nos acompañas en nuestro gran día? *</label>
+                                <div class="radio-stack">
+                                    <label class="radio-option">
+                                        <input type="radio" name="attendance" value="Sí" required />
+                                        ¡Acepto la misión! Allí estaré
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="attendance" value="No" required />
+                                        🌌 Lamentablemente, la Fuerza no me acompaña esta vez
+                                    </label>
+                                </div>
+                            </div>
 
-        <footer>
-            <p>Maitane &amp; Javier · Con todo nuestro cariño</p>
-        </footer>
+                            <div class="form-group">
+                                <label for="song">Canción que no puede faltar en la fiesta</label>
+                                <input type="text" id="song" placeholder="Artista y título..." />
+                            </div>
+
+                            <hr class="form-divider" />
+
+                            <div class="form-group">
+                                <label>¿Vienes con acompañante? *</label>
+                                <div class="radio-inline">
+                                    <label class="radio-option">
+                                        <input type="radio" name="hasCompanion" value="Sí" id="companionYes" />
+                                        Sí
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="hasCompanion" value="No" id="companionNo" checked />
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="companionSection" class="companion-panel" style="display: none">
+                                <div class="form-group">
+                                    <label>Nombre y Apellidos del acompañante</label>
+                                    <div class="form-row-2">
+                                        <div>
+                                            <input type="text" id="companionName" placeholder="Nombre" />
+                                        </div>
+                                        <div>
+                                            <input type="text" id="companionLastName" placeholder="Apellido" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="companionAllergies">Intolerancias, alergias o dietas especiales del acompañante</label>
+                                    <select id="companionAllergies">
+                                        <option value="" disabled selected>Seleccione...</option>
+                                        <option value="Ninguna">Ninguna</option>
+                                        <option value="Celiaca">Celíaca</option>
+                                        <option value="Vegetariana">Vegetariana</option>
+                                        <option value="Vegana">Vegana</option>
+                                        <option value="Otra">Otra</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-solid full-width" id="submitBtn" style="margin-top: 16px">
+                                Enviar Confirmación
+                            </button>
+                            <p id="rsvpFeedback" class="feedback-msg"></p>
+                        </form>
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                <p>Maitane &amp; Javier · Con todo nuestro cariño</p>
+            </footer>
+        </div>
 
         <!-- <script src="js/main.js"></script> -->
     </body>

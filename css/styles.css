@@ -35,13 +35,57 @@ body {
     font-family: var(--font-body);
     line-height: 1.7;
     position: relative;
-    overflow-x: hidden;
-    padding-bottom: 60px;
+    height: 100dvh;
+    overflow: hidden;
 }
 
 body.gatefold-locked {
     overflow: hidden;
     height: 100dvh;
+}
+
+/* Contenedor desplazable de la invitación (lo que hace overflow queda recortado dentro del marco) */
+.invitation-scroll-area {
+    position: fixed;
+    top: 0;
+    bottom: 50px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 25px;
+    z-index: 10;
+
+    /* Oculta la barra en Firefox */
+    scrollbar-width: none;
+    /* Oculta la barra en Edge / IE antiguo */
+    -ms-overflow-style: none;
+}
+
+.invitation-scroll-area::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* Máscara superior marfil para que nada se asome por encima del marco */
+.invitation-scroll-area::before {
+    content: '';
+    position: sticky;
+    top: 0;
+    display: block;
+    height: 1px;
+    pointer-events: none;
+}
+
+/* Tapa el contenido que sube más allá del borde interior del marco superior */
+.frame-top-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-color: var(--bg-ivory);
+    pointer-events: none;
+    z-index: 20;
 }
 
 /* =========================================
@@ -245,7 +289,7 @@ body.gatefold-locked {
 /* Esquinas decorativas dentro de las puertas */
 .door-corner {
     position: absolute;
-    width: clamp(48px, 10vw, 95px);
+    width: clamp(110px, 13vw, 210px);
     height: auto;
     object-fit: contain;
     opacity: 0.8;

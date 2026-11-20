@@ -3,27 +3,29 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Nuestra Boda — Alianza Mágica & Galáctica</title>
+        <title>Nuestra Boda — Alianza Mágica &amp; Galáctica</title>
 
         <!-- Tipografías editoriales elegantes -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
             rel="stylesheet"
         />
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet" />
 
-        <!-- Hoja de estilos -->
+        <!-- Hojas de estilo -->
         <link rel="stylesheet" href="css/styles.css" />
         <link rel="stylesheet" href="css/pruebas.css" />
+
+        <!-- <script src="js/main.js"></script> -->
+        <script src="js/main.js" defer></script>
     </head>
 
-    <body>
+    <body class="gatefold-locked">
         <!-- Invitación Tríptico 3D a Pantalla Completa -->
         <div id="gatefoldOverlay" class="gatefold-overlay">
             <div class="gatefold-scene" id="gatefoldScene">
-                <!-- Fondo interior revelado al abrir las puertas y solapas -->
+                <!-- Fondo interior revelado al abrir -->
                 <div class="gatefold-inner-bg">
                     <div class="inner-reveal-card">
                         <p class="inner-subtitle">Una alianza entre la Fuerza y la Magia</p>
@@ -32,70 +34,40 @@
                     </div>
                 </div>
 
-                <!-- Puertas laterales izquierda y derecha (se abren primero en 3D) -->
+                <!-- Puerta izquierda -->
                 <div class="door door-left">
+                    <!-- Si usas imagen de Canva para la puerta izquierda, descomenta: -->
+                    <!-- <img src="img/puerta-izq.png" alt="" class="door-canva-art" /> -->
                     <div class="door-content">
                         <img src="img/esquina.png" alt="" class="door-corner door-corner-tl" />
                         <img src="img/esquina.png" alt="" class="door-corner door-corner-bl" />
-                        <span class="door-half-title left">Maitane</span>
                     </div>
+
+                    <!-- Sello pegado al borde derecho de la puerta izquierda -->
+                    <button type="button" id="openGatefoldBtn" class="center-seal-trigger" aria-label="Abrir invitación">
+                        <img src="img/sello-2.png" alt="Abrir invitación" class="center-seal-img" />
+                        <span class="center-seal-label">Pulsa para abrir</span>
+                    </button>
                 </div>
 
+                <!-- Puerta derecha -->
                 <div class="door door-right">
+                    <!-- Si usas imagen de Canva para la puerta derecha, descomenta: -->
+                    <!-- <img src="img/puerta-der.png" alt="" class="door-canva-art" /> -->
                     <div class="door-content">
                         <img src="img/esquina.png" alt="" class="door-corner door-corner-tr" />
                         <img src="img/esquina.png" alt="" class="door-corner door-corner-br" />
-                        <span class="door-half-title right">Javier</span>
                     </div>
                 </div>
-
-                <!-- Botón central con vuestro sello -->
-                <button type="button" id="openGatefoldBtn" class="center-seal-trigger" aria-label="Abrir invitación">
-                    <img src="img/sello-1.png" alt="Abrir invitación" class="center-seal-img" />
-                    <span class="center-seal-label">Pulsa para abrir</span>
-                </button>
             </div>
         </div>
-        <!-- <script>
-            (function () {
-                const btn = document.getElementById('openGatefoldBtn');
-                const scene = document.getElementById('gatefoldScene');
-                const overlay = document.getElementById('gatefoldOverlay');
-                const xwing = document.querySelector('.xwing-container');
 
-                if (!btn || !scene || !overlay) return;
-
-                btn.addEventListener('click', function () {
-                    // 1. Abren muy lentamente las puertas laterales en 3D (6.5s)
-                    scene.classList.add('doors-open');
-
-                    // 2. A los 2.0s, el interior empieza a aparecer poco a poco mientras hace zoom
-                    setTimeout(() => {
-                        scene.classList.add('zoom-in');
-                    }, 2000);
-
-                    // 3. A los 8.2s, se funde suavemente hacia la web principal y arranca la X-Wing
-                    setTimeout(() => {
-                        overlay.classList.add('is-done');
-                        if (xwing) {
-                            xwing.style.animationPlayState = 'running';
-                        }
-                    }, 8200);
-
-                    // 4. Al terminar el fundido (10.5s), se oculta por completo la capa
-                    setTimeout(() => {
-                        overlay.style.display = 'none';
-                    }, 10500);
-                });
-            })();
-        </script> -->
-        <!-- Marco ornamental fijo (puedes sustituirlo por tus propias imágenes de esquina en PNG) -->
+        <!-- Marco ornamental fijo -->
         <div class="page-frame" aria-hidden="true">
-            <!-- Marcos ornamentales con tu imagen -->
-            <img src="img/esquina.png" alt="Ornamento" class="corner-ornament corner-tl" />
-            <img src="img/esquina.png" alt="Ornamento" class="corner-ornament corner-tr" />
-            <img src="img/esquina.png" alt="Ornamento" class="corner-ornament corner-bl" />
-            <img src="img/esquina.png" alt="Ornamento" class="corner-ornament corner-br" />
+            <img src="img/esquina.png" alt="" class="corner-ornament corner-tl" />
+            <img src="img/esquina.png" alt="" class="corner-ornament corner-tr" />
+            <img src="img/esquina.png" alt="" class="corner-ornament corner-bl" />
+            <img src="img/esquina.png" alt="" class="corner-ornament corner-br" />
         </div>
 
         <!-- Navegación -->
@@ -216,20 +188,18 @@
 
                 <div class="paper-card rsvp-card">
                     <form id="rsvpForm">
-                        <!-- Nombre y Apellidos del Invitado -->
                         <div class="form-group">
                             <label>Nombre y Apellidos del Invitado *</label>
-                            <div style="display: flex; gap: 10px">
-                                <div style="flex: 1">
+                            <div class="form-row-2">
+                                <div>
                                     <input type="text" id="guestName" required placeholder="Nombre" />
                                 </div>
-                                <div style="flex: 1">
+                                <div>
                                     <input type="text" id="guestLastName" required placeholder="Apellido" />
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Intolerancias -->
                         <div class="form-group">
                             <label for="allergies">Intolerancias, alergias o dietas especiales *</label>
                             <select id="allergies" required>
@@ -242,56 +212,49 @@
                             </select>
                         </div>
 
-                        <!-- ¿Nos acompañas? (Radio buttons) -->
                         <div class="form-group">
                             <label>¿Nos acompañas en nuestro gran día? *</label>
-                            <div style="margin-top: 8px">
-                                <label style="font-weight: normal; display: block; margin-bottom: 6px; cursor: pointer">
+                            <div class="radio-stack">
+                                <label class="radio-option">
                                     <input type="radio" name="attendance" value="Sí" required />
                                     ¡Acepto la misión! Allí estaré
                                 </label>
-                                <label style="font-weight: normal; display: block; cursor: pointer">
+                                <label class="radio-option">
                                     <input type="radio" name="attendance" value="No" required />
                                     🌌 Lamentablemente, la Fuerza no me acompaña esta vez
                                 </label>
                             </div>
                         </div>
 
-                        <!-- Canción -->
                         <div class="form-group">
                             <label for="song">Canción que no puede faltar en la fiesta</label>
                             <input type="text" id="song" placeholder="Artista y título..." />
                         </div>
 
-                        <hr style="border: none; border-top: 1px solid var(--border-soft); margin: 24px 0" />
+                        <hr class="form-divider" />
 
-                        <!-- Acompañante -->
                         <div class="form-group">
                             <label>¿Vienes con acompañante? *</label>
-                            <div style="margin-top: 8px">
-                                <label style="font-weight: normal; display: inline-block; margin-right: 20px; cursor: pointer">
+                            <div class="radio-inline">
+                                <label class="radio-option">
                                     <input type="radio" name="hasCompanion" value="Sí" id="companionYes" />
                                     Sí
                                 </label>
-                                <label style="font-weight: normal; display: inline-block; cursor: pointer">
+                                <label class="radio-option">
                                     <input type="radio" name="hasCompanion" value="No" id="companionNo" checked />
                                     No
                                 </label>
                             </div>
                         </div>
 
-                        <!-- Datos del acompañante (Ocultos por defecto si dice que No) -->
-                        <div
-                            id="companionSection"
-                            style="display: none; border-left: 2px solid var(--ink-sepia); padding-left: 14px; margin-top: 16px"
-                        >
+                        <div id="companionSection" class="companion-panel" style="display: none">
                             <div class="form-group">
                                 <label>Nombre y Apellidos del acompañante</label>
-                                <div style="display: flex; gap: 10px">
-                                    <div style="flex: 1">
+                                <div class="form-row-2">
+                                    <div>
                                         <input type="text" id="companionName" placeholder="Nombre" />
                                     </div>
-                                    <div style="flex: 1">
+                                    <div>
                                         <input type="text" id="companionLastName" placeholder="Apellido" />
                                     </div>
                                 </div>
@@ -310,7 +273,9 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn-solid full-width" id="submitBtn" style="margin-top: 16px">Enviar</button>
+                        <button type="submit" class="btn-solid full-width" id="submitBtn" style="margin-top: 16px">
+                            Enviar Confirmación
+                        </button>
                         <p id="rsvpFeedback" class="feedback-msg"></p>
                     </form>
                 </div>
@@ -321,220 +286,6 @@
             <p>Maitane &amp; Javier · Con todo nuestro cariño</p>
         </footer>
 
-        <script>
-            // =========================================
-            // 1. CUENTA ATRÁS (Cambia la fecha aquí)
-            // =========================================
-            const weddingDate = new Date('2027-04-03T12:30:00').getTime();
-
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const diff = weddingDate - now;
-
-                if (diff <= 0) {
-                    document.getElementById('countdown').innerHTML = "<p class='date-banner'>¡Hoy es el Gran Día!</p>";
-                    return;
-                }
-
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-                document.getElementById('days').textContent = String(d).padStart(2, '0');
-                document.getElementById('hours').textContent = String(h).padStart(2, '0');
-                document.getElementById('minutes').textContent = String(m).padStart(2, '0');
-                document.getElementById('seconds').textContent = String(s).padStart(2, '0');
-            }
-            setInterval(updateCountdown, 1000);
-            updateCountdown();
-
-            // =========================================
-            // 2. BUSCADOR DE MESAS (Meseros reales)
-            // =========================================
-            const tablesData = [
-                { table: 'Capitolio', saga: 'Los Juegos del Hambre', guests: ['Javier', 'Mai'] },
-                {
-                    table: 'Elfos Domésticos',
-                    saga: 'Harry Potter',
-                    guests: ['Aitana', 'Lara', 'Alejandro', 'Leire', 'Arya', 'Natalia', 'Dani', 'Pablo', 'Elea', 'Sandra', 'Emma', 'Sara'],
-                },
-                {
-                    table: 'Alianza Rebelde',
-                    saga: 'Star Wars',
-                    guests: ['Aitana', 'Mª Jesús', 'Antonio', 'Yaya', 'Ares', 'Yayo', 'El Pájaro', 'Juan Ignacio', 'Leyre'],
-                },
-                {
-                    table: 'La Orden del Fénix',
-                    saga: 'Harry Potter',
-                    guests: ['Adriana', 'Cris', 'Guille', 'Helena', 'Isa', 'Luis', 'Mari', 'Raúl', 'Virgilio'],
-                },
-                {
-                    table: 'Imperio Galáctico',
-                    saga: 'Star Wars',
-                    guests: [
-                        'Encar',
-                        'Félix',
-                        'Maite',
-                        'Ana Tere',
-                        'Nines',
-                        'Manolín',
-                        'Jose',
-                        'El Mafias',
-                        'Lolo',
-                        'Tere',
-                        'Uwe',
-                        'Susana',
-                    ],
-                },
-                {
-                    table: 'Hyrule',
-                    saga: 'The Legend of Zelda',
-                    guests: [
-                        'Andreita',
-                        'Nines',
-                        'Lorena',
-                        'Uwe',
-                        'Lucas',
-                        'Rubén',
-                        'Ainara',
-                        'Iker',
-                        'Itziar',
-                        'Ariadna',
-                        'Jose Manuel',
-                        'Javi',
-                        'Sandra',
-                        'Nacho',
-                        'Novia Javi',
-                        'Novio Itziar',
-                    ],
-                },
-                {
-                    table: 'The Big Bang Theory',
-                    saga: 'The Big Bang Theory',
-                    guests: ['Almu', 'Carlos', 'Bebé de Almu y Carlos', 'Elea', 'Irene', 'Liu', 'Patri', 'Nuri', 'Javi', 'Ewa', 'Marcos'],
-                },
-                {
-                    table: 'The Matrix',
-                    saga: 'Matrix',
-                    guests: ['Ana', 'Antonio', 'Carlos', 'Cris', 'Jorge', 'Luis', 'Marcos', 'Novia Yisus', 'Olga', 'Yisus'],
-                },
-                {
-                    table: 'Battlestar Galáctica',
-                    saga: 'BSG 75',
-                    guests: [
-                        'Carlos',
-                        'David',
-                        'Iván',
-                        'Marta',
-                        'Verónica',
-                        'Javi Joven',
-                        'Laura',
-                        'Álvaro',
-                        'Javi Viejo',
-                        'Miguel',
-                        'Carlos Ródenas',
-                        'Novia Carlos',
-                    ],
-                },
-                {
-                    table: 'Dune',
-                    saga: 'Arrakis',
-                    guests: ['Cris', 'Rubén', 'Óscar', 'Nacho', 'Cheli', 'Felixín', 'Nachete', 'Gema', 'Belén', 'Miriam', 'Jose', 'Maite'],
-                },
-                { table: 'Gondor', saga: 'El Señor de los Anillos', guests: ['Invitados de Gondor'] },
-                { table: 'Los Mercenarios', saga: 'Expendables', guests: ['Pita', 'Novia Pita', 'Nacho', 'Ainhoa', 'Fátima', 'Jose'] },
-            ];
-
-            const searchInput = document.getElementById('guestSearch');
-            const resultsContainer = document.getElementById('searchResults');
-
-            function normalizeText(str) {
-                return str
-                    .normalize('NFD')
-                    .replace(/[\u0300-\u036f]/g, '')
-                    .toLowerCase()
-                    .trim();
-            }
-
-            searchInput.addEventListener('input', (e) => {
-                const query = normalizeText(e.target.value);
-                if (query.length < 2) {
-                    resultsContainer.innerHTML = '<p class="empty-msg">Empieza a escribir tu nombre para revelar tu mesa...</p>';
-                    return;
-                }
-
-                const matches = [];
-                tablesData.forEach((item) => {
-                    item.guests.forEach((guest) => {
-                        if (normalizeText(guest).includes(query)) {
-                            matches.push({ guest, table: item.table, saga: item.saga });
-                        }
-                    });
-                });
-
-                if (matches.length === 0) {
-                    resultsContainer.innerHTML =
-                        '<p class="empty-msg">No hemos encontrado ese nombre. Prueba con otro apodo o nombre de pila.</p>';
-                    return;
-                }
-
-                resultsContainer.innerHTML = matches
-                    .map(
-                        (m) => `
-        <div class="result-card">
-          <p class="result-guest">${m.guest}</p>
-          <p class="result-table">Mesa: ${m.table}</p>
-          <p class="result-saga">Universo: ${m.saga}</p>
-        </div>
-      `,
-                    )
-                    .join('');
-            });
-
-            // =========================================
-            // 3. FORMULARIO RSVP -> GOOGLE SHEETS
-            // =========================================
-            const scriptURL = 'PEGAR_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT';
-
-            document.getElementById('rsvpForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                const submitBtn = document.getElementById('submitBtn');
-                const feedback = document.getElementById('rsvpFeedback');
-
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Enviando lechuza...';
-                feedback.style.display = 'block';
-                feedback.style.color = 'var(--ink-sepia)';
-                feedback.textContent = 'Transmitiendo datos a la Orden...';
-
-                const formData = {
-                    nombre: document.getElementById('guestName').value,
-                    asistencia: document.getElementById('attendance').value,
-                    alergias: document.getElementById('allergies').value || 'Ninguna',
-                };
-
-                fetch(scriptURL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData),
-                })
-                    .then(() => {
-                        feedback.textContent = `¡Muchas gracias, ${formData.nombre}! Tu confirmación se ha registrado con éxito.`;
-                        this.reset();
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Enviar Confirmación';
-                    })
-                    .catch((error) => {
-                        console.error('Error!', error.message);
-                        feedback.style.color = '#a94442';
-                        feedback.textContent = 'Hubo un pequeño error en la red galáctica. Por favor, inténtalo de nuevo.';
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Enviar Confirmación';
-                    });
-            });
-        </script>
+        <!-- <script src="js/main.js"></script> -->
     </body>
 </html>

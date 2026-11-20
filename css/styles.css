@@ -17,7 +17,9 @@
 /* =========================================
    RESET Y ESTILOS BASE
    ========================================= */
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -37,6 +39,11 @@ body {
     padding-bottom: 60px;
 }
 
+body.gatefold-locked {
+    overflow: hidden;
+    height: 100dvh;
+}
+
 /* =========================================
    APERTURA 3D MUY LENTA CON ZOOM HACIA LA WEB
    ========================================= */
@@ -44,7 +51,7 @@ body {
     position: fixed;
     inset: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     z-index: 9999;
     overflow: hidden;
     background-color: transparent;
@@ -67,57 +74,52 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Interior: empieza transparente y va apareciendo muy despacio junto al zoom */
 .gatefold-inner-bg {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 45%, rgba(252, 251, 249, 0.95) 0%, rgba(235, 224, 204, 0.9) 100%);
+    background: rgb(235, 224, 204);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1;
-    opacity: 0;
-    transform: scale(0.95);
-    transition:
-        opacity 4.5s cubic-bezier(0.22, 0.85, 0.25, 1),
-        transform 6.2s cubic-bezier(0.22, 0.85, 0.25, 1);
-    will-change: transform, opacity;
-}
-
-.gatefold-scene.zoom-in .gatefold-inner-bg {
-    opacity: 0.92;
-    transform: scale(2.15);
+    transition: opacity 4.5s cubic-bezier(0.22, 0.85, 0.25, 1);
+    will-change: opacity;
 }
 
 .inner-reveal-card {
     text-align: center;
-    padding: 40px 32px;
+    padding: clamp(24px, 5vw, 40px) clamp(18px, 4vw, 32px);
     border: 1px solid var(--accent-gold);
     background: rgba(252, 251, 249, 0.88);
     box-shadow: 0 16px 40px rgba(44, 36, 30, 0.12);
     max-width: 540px;
     width: 86%;
     opacity: 0;
-    transition: opacity 2.6s ease;
+    transform: scale(0.92);
+    transition:
+        transform 6.2s cubic-bezier(0.22, 0.85, 0.25, 1),
+        opacity 2.6s ease;
+    will-change: transform, opacity;
 }
 
 .gatefold-scene.zoom-in .inner-reveal-card {
-    opacity: 0.88;
+    opacity: 0.92;
+    transform: scale(1.05);
 }
 
 .inner-subtitle {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
     color: var(--ink-muted);
     margin-bottom: 8px;
 }
 
 .inner-names {
     font-family: var(--font-serif);
-    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-size: clamp(1.9rem, 6vw, 3.8rem);
     color: var(--ink-sepia);
-    line-height: 1.1;
+    line-height: 1.15;
     margin-bottom: 10px;
 }
 
@@ -125,17 +127,18 @@ body {
     font-family: var(--font-serif);
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    font-size: 1.05rem;
+    font-size: clamp(0.85rem, 2.2vw, 1.05rem);
     color: var(--ink-dark);
 }
 
-/* Puertas laterales izquierda y derecha en 3D (6.5s de apertura pausada) */
+/* Puertas laterales izquierda y derecha en 3D */
 .door {
     position: absolute;
     top: 0;
     width: 50%;
     height: 100%;
-    background: linear-gradient(180deg, #fcfaf5 0%, #efe6d6 100%);
+    background:
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.65) 0%, transparent 55%), linear-gradient(180deg, #fcfaf5 0%, #efe6d6 100%);
     z-index: 3;
     backface-visibility: hidden;
     transform-style: preserve-3d;
@@ -145,7 +148,9 @@ body {
         opacity 2.2s ease;
     display: flex;
     align-items: center;
-    box-shadow: inset 0 0 40px rgba(92, 73, 56, 0.08);
+    box-shadow:
+        inset 0 0 40px rgba(92, 73, 56, 0.08),
+        inset 0 2px 3px rgba(255, 255, 255, 0.85);
     will-change: transform, opacity;
 }
 
@@ -154,7 +159,9 @@ body {
     transform-origin: left center;
     border-right: 1px solid var(--border-soft);
     justify-content: flex-end;
-    padding-right: clamp(24px, 6vw, 80px);
+    padding-right: clamp(18px, 4vw, 64px);
+    overflow: visible;
+    z-index: 4;
 }
 
 .door-right {
@@ -162,7 +169,18 @@ body {
     transform-origin: right center;
     border-left: 1px solid var(--border-soft);
     justify-content: flex-start;
-    padding-left: clamp(24px, 6vw, 80px);
+    padding-left: clamp(18px, 4vw, 64px);
+    overflow: hidden;
+}
+
+.door-canva-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .door-content {
@@ -171,110 +189,102 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
+    z-index: 2;
 }
 
 .door-left .door-content {
     justify-content: flex-end;
+    overflow: hidden;
 }
 
 .door-right .door-content {
     justify-content: flex-start;
 }
 
-.door-half-title {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 5vw, 3.6rem);
-    color: var(--ink-sepia);
-    letter-spacing: 0.03em;
-    user-select: none;
-}
-
 /* Esquinas decorativas dentro de las puertas */
 .door-corner {
     position: absolute;
-    width: 85px;
-    max-width: 100px;
+    width: clamp(48px, 10vw, 95px);
+    height: auto;
     object-fit: contain;
-    opacity: 0.75;
+    opacity: 0.8;
     pointer-events: none;
 }
 
-/* Arriba derecha: orientación original de la imagen */
 .door-corner-tr {
     top: 12px;
-    right: 24px;
+    right: 12px;
     transform: none;
 }
 
-/* Arriba izquierda: espejo horizontal */
 .door-corner-tl {
     top: 12px;
     left: 12px;
     transform: scaleX(-1);
 }
 
-/* Abajo derecha: espejo vertical */
 .door-corner-br {
     bottom: 12px;
-    right: 24px;
+    right: 12px;
     transform: scaleY(-1);
 }
 
-/* Abajo izquierda: espejo horizontal y vertical */
 .door-corner-bl {
     bottom: 12px;
     left: 12px;
     transform: scale(-1, -1);
 }
-/* Botón central del sello */
+
+/* Botón central pegado al borde derecho de .door-left */
 .center-seal-trigger {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
+    right: 0;
+    transform: translate(50%, -50%);
+    z-index: 10;
     background: transparent;
     border: none;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
+    transform-style: preserve-3d;
     transition:
-        transform 0.6s ease,
-        opacity 0.9s ease;
+        transform 0.45s ease,
+        filter 6.5s ease;
+    will-change: transform;
 }
 
 .center-seal-trigger:hover {
-    transform: translate(-50%, -50%) scale(1.07);
+    transform: translate(50%, -50%) scale(1.07);
 }
 
 .center-seal-img {
-    width: 108px;
-    height: 108px;
+    width: clamp(150px, 30vw, 220px);
+    height: clamp(150px, 30vw, 220px);
     object-fit: contain;
-    filter: drop-shadow(0 8px 18px rgba(44, 36, 30, 0.32));
+    filter: drop-shadow(0 12px 26px rgba(44, 36, 30, 0.36));
 }
 
 .center-seal-label {
     margin-top: 10px;
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1rem;
+    font-size: clamp(0.82rem, 2.5vw, 1rem);
     color: var(--ink-sepia);
-    background: rgba(252, 251, 249, 0.92);
+    background: rgba(252, 251, 249, 0.94);
     padding: 4px 14px;
     border: 1px solid var(--border-soft);
     border-radius: 999px;
     box-shadow: 0 4px 12px rgba(44, 36, 30, 0.08);
+    white-space: nowrap;
 }
 
-/* =========================================
-   ESTADOS DE LA SECUENCIA MUY LENTA EN 3D
-   ========================================= */
+/* Estados de apertura 3D: el sello gira pegado a .door-left sin desaparecer */
 .gatefold-scene.doors-open .center-seal-trigger {
-    opacity: 0;
+    opacity: 1;
     pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.82);
+    transform: translate(50%, -50%);
 }
 
 .gatefold-scene.doors-open .door-left {
@@ -300,29 +310,33 @@ body {
 
 .corner-ornament {
     position: fixed;
-    width: 50%;
-    max-width: 240px;
+    width: clamp(54px, 14vw, 160px);
+    height: auto;
     pointer-events: none;
     z-index: 51;
 }
 
 .corner-tl {
     top: 16px;
-    left: 26px;
+    left: 18px;
     transform: scaleX(-1);
 }
+
 .corner-tr {
     top: 16px;
-    right: 26px;
+    right: 18px;
+    transform: none;
 }
+
 .corner-bl {
-    bottom: 18px;
-    left: 26px;
+    bottom: 16px;
+    left: 18px;
     transform: scale(-1, -1);
 }
+
 .corner-br {
     bottom: 16px;
-    right: 26px;
+    right: 18px;
     transform: scaleY(-1);
 }
 
@@ -342,7 +356,7 @@ nav {
 nav a {
     text-decoration: none;
     font-family: var(--font-serif);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -371,14 +385,14 @@ header {
 .subtitle {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 3vw, 1.25rem);
     color: var(--ink-muted);
     margin-bottom: 8px;
 }
 
 h1 {
     font-family: var(--font-serif);
-    font-size: clamp(2.8rem, 6vw, 4.4rem);
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
     font-weight: 600;
     color: var(--ink-sepia);
     letter-spacing: 0.03em;
@@ -388,7 +402,7 @@ h1 {
 
 .date-banner {
     font-family: var(--font-serif);
-    font-size: 1.35rem;
+    font-size: clamp(1.1rem, 3vw, 1.35rem);
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -399,7 +413,7 @@ h1 {
 .countdown {
     display: flex;
     justify-content: center;
-    gap: 18px;
+    gap: 14px;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
@@ -407,22 +421,22 @@ h1 {
 .count-item {
     background: var(--bg-paper);
     border: 1px solid var(--border-soft);
-    padding: 14px 20px;
-    min-width: 84px;
+    padding: 14px 18px;
+    min-width: 78px;
     box-shadow: 0 4px 12px rgba(92, 73, 56, 0.04);
 }
 
 .count-num {
     display: block;
     font-family: var(--font-serif);
-    font-size: 2rem;
+    font-size: clamp(1.6rem, 4vw, 2rem);
     font-weight: 700;
     color: var(--ink-sepia);
     line-height: 1.1;
 }
 
 .count-label {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--ink-muted);
@@ -444,7 +458,7 @@ section {
 
 h2 {
     font-family: var(--font-serif);
-    font-size: clamp(2rem, 4vw, 2.6rem);
+    font-size: clamp(1.75rem, 4vw, 2.6rem);
     font-weight: 600;
     color: var(--ink-sepia);
     margin-bottom: 12px;
@@ -454,7 +468,7 @@ h2 {
     max-width: 620px;
     margin: 0 auto 32px;
     color: var(--ink-muted);
-    font-size: 1.02rem;
+    font-size: 1rem;
 }
 
 .divider {
@@ -480,21 +494,21 @@ h2 {
    ========================================= */
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
 }
 
 .paper-card {
     background: var(--bg-paper);
     border: 1px solid var(--border-soft);
-    padding: 34px 28px;
+    padding: 30px 24px;
     box-shadow: 0 6px 20px rgba(92, 73, 56, 0.05);
     position: relative;
 }
 
 .paper-card h3 {
     font-family: var(--font-serif);
-    font-size: 1.7rem;
+    font-size: 1.55rem;
     color: var(--ink-sepia);
     margin-bottom: 8px;
 }
@@ -511,19 +525,19 @@ h2 {
 .card-detail {
     color: var(--ink-dark);
     margin-bottom: 22px;
-    font-size: 0.98rem;
+    font-size: 0.96rem;
 }
 
 .btn-outline,
 .btn-solid {
     display: inline-block;
     font-family: var(--font-serif);
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 11px 26px;
+    padding: 11px 24px;
     cursor: pointer;
     transition: all 0.25s ease;
 }
@@ -569,9 +583,9 @@ h2 {
 
 .search-input {
     width: 100%;
-    padding: 15px 18px;
+    padding: 14px 16px;
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 0.98rem;
     color: var(--ink-dark);
     background: var(--bg-paper);
     border: 1px solid var(--ink-sepia);
@@ -600,14 +614,14 @@ h2 {
     background: var(--bg-paper);
     border: 1px solid var(--border-soft);
     border-left: 4px solid var(--ink-sepia);
-    padding: 18px 22px;
+    padding: 16px 20px;
     text-align: left;
     box-shadow: 0 4px 12px rgba(92, 73, 56, 0.04);
 }
 
 .result-guest {
     font-family: var(--font-serif);
-    font-size: 1.45rem;
+    font-size: 1.35rem;
     font-weight: 700;
     color: var(--ink-dark);
 }
@@ -630,7 +644,7 @@ h2 {
 .pensieve-box {
     background: var(--bg-paper);
     border: 1px solid var(--border-soft);
-    padding: 36px 28px;
+    padding: 32px 24px;
     max-width: 620px;
     margin: 0 auto;
 }
@@ -648,16 +662,46 @@ h2 {
     margin-bottom: 20px;
 }
 
+.form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
 .form-group label {
     display: block;
     font-family: var(--font-serif);
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--ink-sepia);
     margin-bottom: 6px;
 }
 
-.form-group input,
+.form-group .radio-option {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: var(--ink-dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.radio-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.radio-inline {
+    display: flex;
+    gap: 24px;
+    margin-top: 8px;
+}
+
+.form-group input[type='text'],
 .form-group select,
 .form-group textarea {
     width: 100%;
@@ -673,11 +717,28 @@ h2 {
         background-color 0.2s ease;
 }
 
+.form-group input[type='radio'] {
+    width: auto;
+    accent-color: var(--ink-sepia);
+}
+
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     border-color: var(--ink-sepia);
     background: var(--bg-paper);
+}
+
+.form-divider {
+    border: none;
+    border-top: 1px solid var(--border-soft);
+    margin: 24px 0;
+}
+
+.companion-panel {
+    border-left: 2px solid var(--ink-sepia);
+    padding-left: 14px;
+    margin-top: 16px;
 }
 
 .feedback-msg {
@@ -689,33 +750,109 @@ h2 {
 }
 
 /* =========================================
-   PIE DE PÁGINA Y RESPONSIVE
+   PIE DE PÁGINA Y RESPONSIVE MÓVIL
    ========================================= */
 footer {
     text-align: center;
     padding: 30px 20px 10px;
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--ink-muted);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
     .page-frame {
         inset: 8px;
     }
+
     .corner-ornament {
-        width: 58px;
-        height: 58px;
+        width: 52px;
     }
+
+    .corner-tl {
+        top: 10px;
+        left: 10px;
+    }
+
+    .corner-tr {
+        top: 10px;
+        right: 10px;
+    }
+
+    .corner-bl {
+        bottom: 10px;
+        left: 10px;
+    }
+
+    .corner-br {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .door-content {
+        height: 100%;
+        align-items: flex-start;
+        padding-top: 24dvh;
+    }
+
+    .door-left {
+        padding-right: 12px;
+        justify-content: flex-end;
+    }
+
+    .door-right {
+        padding-left: 12px;
+        justify-content: flex-start;
+    }
+
+    .door-corner {
+        width: 48px;
+    }
+
+    .door-corner-tl,
+    .door-corner-tr {
+        top: 12px;
+    }
+
+    .door-corner-bl,
+    .door-corner-br {
+        bottom: 12px;
+    }
+
+    .door-corner-tl,
+    .door-corner-bl {
+        left: 10px;
+    }
+
+    .door-corner-tr,
+    .door-corner-br {
+        right: 10px;
+    }
+
     nav {
-        gap: 14px;
-        padding-top: 22px;
+        gap: 12px 16px;
+        padding: 22px 16px 8px;
     }
+
     nav a {
-        font-size: 0.95rem;
+        font-size: 0.88rem;
     }
+
     header {
-        padding-top: 32px;
+        padding: 28px 18px 16px;
+    }
+
+    main {
+        padding: 0 18px;
+    }
+
+    .count-item {
+        min-width: 68px;
+        padding: 10px 12px;
+    }
+
+    .form-row-2 {
+        grid-template-columns: 1fr;
     }
 }

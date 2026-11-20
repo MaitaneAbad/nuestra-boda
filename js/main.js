@@ -10,27 +10,36 @@
 
     if (!btn || !scene || !overlay) return;
 
+    let isOpening = false;
+
     btn.addEventListener('click', function () {
+        if (isOpening) return;
+        isOpening = true;
+        btn.disabled = true;
+
+        // 1. Abren las puertas laterales en 3D (6.5s en CSS)
         scene.classList.add('doors-open');
 
+        // 2. A los 1.8s entra la tarjeta interior con zoom progresivo (4.4s en CSS)
         setTimeout(() => {
             scene.classList.add('zoom-in');
-        }, 2000);
+        }, 740);
 
+        // 3. A los 6.6s (justo al terminar la apertura de 6.5s), fundido hacia la web (1.8s en CSS)
         setTimeout(() => {
             overlay.classList.add('is-done');
             document.body.classList.remove('gatefold-locked');
             if (xwing) {
                 xwing.style.animationPlayState = 'running';
             }
-        }, 8200);
+        }, 3600);
 
+        // 4. A los 8.6s (200ms tras acabar el fundido de 1.8s), ocultamos el overlay
         setTimeout(() => {
             overlay.style.display = 'none';
-        }, 10500);
+        }, 8600);
     });
 })();
-
 // =========================================
 // 1. CUENTA ATRÁS
 // =========================================

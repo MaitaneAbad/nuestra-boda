@@ -267,3 +267,197 @@ companionRadios.forEach((radio) => {
 //             });
 //     });
 // }
+
+// =========================================
+// EASTER EGG (2 NIVELES - SOLO MÓVIL): "LA FUERZA NO ME ACOMPAÑA"
+// =========================================
+
+function isMobileOrTabletView() {
+        const ua = navigator.userAgent || '';
+        const platform = navigator.platform || '';
+        const maxTouch = navigator.maxTouchPoints || 0;
+
+        // Detecta iPhone, iPod, iPad (incluidos iPadOS modernos con MacIntel + touch) y Android/móviles/tablets
+        const isAppleMobileOrTablet =
+            /iPhone|iPod|iPad/i.test(ua) ||
+            (platform === 'MacIntel' && maxTouch > 1);
+
+        const isAndroidOrMobileUA =
+            /Android|webOS|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet/i.test(ua);
+
+        const hasCoarsePointer =
+            window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+
+        return (isAppleMobileOrTablet || isAndroidOrMobileUA) && (hasCoarsePointer || maxTouch > 0);
+    }
+
+(function () {
+    const modal = document.getElementById('forceEasterEggModal');
+    const badgeEl = modal?.querySelector('.easter-badge');
+    const titleEl = document.getElementById('easterModalTitle');
+    const textEl = modal?.querySelector('.easter-modal-text');
+    const confirmDeclineBtn = document.getElementById('confirmDeclineBtn');
+    const reconsiderBtn = document.getElementById('reconsiderBtn');
+
+    if (!modal || !confirmDeclineBtn || !reconsiderBtn) return;
+
+    let lastDeclineInput = null;
+    let stage = 1; // 1 = primer aviso, 2 = segundo vacile al insistir
+    let closeTimer = null;
+
+    const stages = {
+        1: {
+            badge: 'TRANSMISIÓN INTERCEPTADA',
+            title: '¿Seguro, padawan?',
+            text: '¿De verdad vas a rechazar la invitación? El lado oscuro del sofá no compensa... ¿estás seguro de que no te vas a pasar aunque sea a brindar?',
+            confirmLabel: 'Sí, lo tengo clarísimo',
+            reconsiderLabel: 'Vale, me lo pienso mejor'
+        },
+        2: {
+            badge: 'ALERTA DE NIVEL SITH',
+            title: '¿En serio? ¿Última palabra?',
+            text: 'Ojo, que esto queda registrado en los archivos del Consejo Jedi y en el Pensadero... ¿segurísimo de que no hay ninguna poción multijugos o salto hiperespacial que te salve?',
+            confirmLabel: 'Acepto las consecuencias',
+            reconsiderLabel: 'De acuerdo, me rindo, voy'
+        }
+    };
+
+    function getOptionLabelText(el) {
+        if (!el) return '';
+        return (
+            (el.id && document.querySelector(`label[for="${el.id}"]`)?.textContent) ||
+            el.closest('label')?.textContent ||
+            ''
+        )
+            .trim()
+            .toLowerCase();
+    }
+
+    function isDeclineOption(el) {
+        if (!el) return false;
+        const val = (el.value || '').toLowerCase();
+        const labelText = getOptionLabelText(el);
+
+        return (
+            val.includes('fuerza') ||
+            val.includes('lamentablemente') ||
+            val.includes('no_asiste') ||
+            val.includes('declinar') ||
+            val === 'no' ||
+            labelText.includes('fuerza no me acompaña') ||
+            labelText.includes('lamentablemente') ||
+            labelText.startsWith('no')
+        );
+    }
+
+    function findYesOption(declineEl) {
+        const container = declineEl?.closest('form, .rsvp-card, section') || document;
+        const radios = Array.from(container.querySelectorAll('input[type="radio"]'));
+
+        const group = declineEl?.name
+            ? radios.filter((r) => r.name === declineEl.name)
+            : radios;
+
+        return (
+            group.find((r) => r !== declineEl && !isDeclineOption(r)) || null
+        );
+    }
+
+    function selectRadioOption(radioEl) {
+        if (!radioEl) return;
+        radioEl.checked = true;
+        radioEl.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    function applyStage(currentStage) {
+        const data = stages[currentStage] || stages[1];
+        if (badgeEl) badgeEl.textContent = data.badge;
+        if (titleEl) titleEl.textContent = data.title;
+        if (textEl) textEl.textContent = data.text;
+        confirmDeclineBtn.textContent = data.confirmLabel;
+        reconsiderBtn.textContent = data.reconsiderLabel;
+    }
+
+    function openModal(triggerInput) {
+        if (!isMobileOrTabletView()) return;
+
+        if (closeTimer) {
+            clearTimeout(closeTimer);
+            closeTimer = null;
+        }
+
+        lastDeclineInput = triggerInput || null;
+        stage = 1;
+        applyStage(stage);
+        modal.hidden = false;
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                modal.classList.add('is-open');
+            });
+        });
+    }
+
+    function closeModal() {
+        modal.classList.remove('is-open');
+
+        if (closeTimer) {
+            clearTimeout(closeTimer);
+        }
+
+        closeTimer = setTimeout(() => {
+            modal.hidden = true;
+            stage = 1;
+            closeTimer = null;
+        }, 280);
+    }
+
+    document.addEventListener('change', function (e) {
+        if (!isMobileOrTabletView()) return;
+
+        const target = e.target;
+        if (!target || !target.matches('input[type="radio"]')) return;
+
+        if (isDeclineOption(target)) {
+            openModal(target);
+        }
+    });
+
+    confirmDeclineBtn.addEventListener('click', function () {
+        if (stage === 1) {
+            stage = 2;
+            applyStage(2);
+            if (lastDeclineInput && lastDeclineInput.type === 'radio') {
+                lastDeclineInput.checked = true;
+            }
+        } else {
+            if (lastDeclineInput && lastDeclineInput.type === 'radio') {
+                lastDeclineInput.checked = true;
+            }
+            closeModal();
+        }
+    });
+
+    reconsiderBtn.addEventListener('click', function () {
+        const yesInput = findYesOption(lastDeclineInput);
+        if (yesInput) {
+            selectRadioOption(yesInput);
+        } else if (lastDeclineInput && lastDeclineInput.type === 'radio') {
+            lastDeclineInput.checked = false;
+            lastDeclineInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        closeModal();
+    });
+
+    modal.addEventListener('click', function (e) {
+        if (e.target.dataset.closeModal === 'true') {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.hidden) {
+            closeModal();
+        }
+    });
+})();

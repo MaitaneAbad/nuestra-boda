@@ -659,71 +659,6 @@ h2 {
 }
 
 /* =========================================
-   BUSCADOR DE MESAS
-   ========================================= */
-.seating-box {
-    max-width: 580px;
-    margin: 0 auto;
-}
-
-.search-input {
-    width: 100%;
-    padding: 14px 16px;
-    font-family: var(--font-body);
-    font-size: 0.98rem;
-    color: var(--ink-dark);
-    background: var(--bg-paper);
-    border: 1px solid var(--ink-sepia);
-    outline: none;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 14px rgba(92, 73, 56, 0.05);
-}
-
-.search-input::placeholder {
-    color: var(--ink-muted);
-    font-style: italic;
-}
-
-.search-results {
-    display: grid;
-    gap: 14px;
-}
-
-.empty-msg {
-    font-style: italic;
-    color: var(--ink-muted);
-    padding: 12px;
-}
-
-.result-card {
-    background: var(--bg-paper);
-    border: 1px solid var(--border-soft);
-    border-left: 4px solid var(--ink-sepia);
-    padding: 16px 20px;
-    text-align: left;
-    box-shadow: 0 4px 12px rgba(92, 73, 56, 0.04);
-}
-
-.result-guest {
-    font-family: var(--font-serif);
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--ink-dark);
-}
-
-.result-table {
-    font-weight: 600;
-    color: var(--ink-sepia);
-    margin-top: 2px;
-}
-
-.result-saga {
-    font-size: 0.9rem;
-    font-style: italic;
-    color: var(--ink-muted);
-}
-
-/* =========================================
    EL PENSADERO
    ========================================= */
 .pensieve-box {
@@ -832,6 +767,94 @@ h2 {
     text-align: center;
     font-style: italic;
     font-weight: 600;
+}
+
+/* =========================================
+   MODAL EASTER EGG (RSVP)
+   ========================================= */
+.easter-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.28s ease,
+        visibility 0.28s ease;
+}
+
+.easter-modal[hidden] {
+    display: none;
+}
+
+.easter-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.easter-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 36, 30, 0.55);
+    backdrop-filter: blur(2px);
+}
+
+.easter-modal-card {
+    position: relative;
+    z-index: 1;
+    max-width: 460px;
+    width: 100%;
+    background: var(--bg-paper);
+    border: 1px solid var(--accent-gold);
+    box-shadow: 0 20px 50px rgba(44, 36, 30, 0.28);
+    padding: 32px 26px;
+    text-align: center;
+    transform: translateY(10px) scale(0.97);
+    transition: transform 0.32s cubic-bezier(0.22, 0.85, 0.25, 1);
+}
+
+.easter-modal.is-open .easter-modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.easter-badge {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--accent-gold);
+    margin-bottom: 10px;
+}
+
+.easter-modal-card h3 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.45rem, 4vw, 1.9rem);
+    color: var(--ink-sepia);
+    margin-bottom: 12px;
+}
+
+.easter-modal-text {
+    color: var(--ink-dark);
+    font-size: 0.96rem;
+    line-height: 1.65;
+    margin-bottom: 24px;
+}
+
+.easter-modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.easter-modal-actions button {
+    font-size: 0.85rem;
+    padding: 10px 18px;
 }
 
 /* =========================================

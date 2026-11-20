@@ -76,7 +76,6 @@
             <nav>
                 <a href="#inicio">Inicio</a>
                 <a href="#evento">El Gran Día</a>
-                <a href="#mesas">Buscador de Mesas</a>
                 <a href="#pensadero">El Pensadero</a>
                 <a href="#asistencia">Confirmar</a>
             </nav>
@@ -140,27 +139,6 @@
                             </p>
                             <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-outline">Cómo Llegar</a>
                         </article>
-                    </div>
-                </section>
-
-                <div class="divider"><span>✦</span></div>
-
-                <!-- Sección 2: Buscador de Mesas -->
-                <section id="mesas">
-                    <h2>¿Cuál es tu mesa?</h2>
-                    <p class="section-intro">Escribe tu nombre para descubrir a qué facción, reino o universo perteneces en el banquete.</p>
-
-                    <div class="seating-box">
-                        <input
-                            type="text"
-                            id="guestSearch"
-                            class="search-input"
-                            placeholder="Escribe tu nombre (ej. Aitana, Carlos, Adriana, Pita...)"
-                            autocomplete="off"
-                        />
-                        <div id="searchResults" class="search-results">
-                            <p class="empty-msg">Empieza a escribir tu nombre para revelar tu mesa...</p>
-                        </div>
                     </div>
                 </section>
 
@@ -285,10 +263,29 @@
             </main>
 
             <footer>
-                <p>Maitane &amp; Javier · Con todo nuestro cariño</p>
+                <p>
+                    Maitane &amp; Javier
+                    <br />
+                    Con todo nuestro cariño
+                </p>
             </footer>
         </div>
-
+        <!-- Modal Easter Egg: "Lamentablemente, la Fuerza no me acompaña esta vez" -->
+        <div id="forceEasterEggModal" class="easter-modal" role="dialog" aria-modal="true" aria-labelledby="easterModalTitle" hidden>
+            <div class="easter-modal-backdrop" data-close-modal="true"></div>
+            <div class="easter-modal-card">
+                <span class="easter-badge">TRANSMISIÓN INTERCEPTADA</span>
+                <h3 id="easterModalTitle">¿Seguro, padawan?</h3>
+                <p class="easter-modal-text">
+                    ¿De verdad vas a rechazar la invitación? El lado oscuro del sofá no compensa... ¿estás seguro de que no te vas a pasar
+                    aunque sea a brindar?
+                </p>
+                <div class="easter-modal-actions">
+                    <button type="button" class="btn-outline" id="confirmDeclineBtn">Sí, lo tengo clarísimo</button>
+                    <button type="button" class="btn-solid" id="reconsiderBtn">Vale, me lo pienso mejor</button>
+                </div>
+            </div>
+        </div>
         <!-- <script src="js/main.js"></script> -->
     </body>
 </html>

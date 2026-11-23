@@ -461,3 +461,292 @@ function isMobileOrTabletView() {
         }
     });
 })();
+
+// =========================================
+// EASTER EGGS DE ESCRITORIO Y CONFIRMACIÓN RSVP
+// =========================================
+(function () {
+    const isDesktop = () =>
+        window.matchMedia('(pointer: fine)').matches && window.innerWidth > 768;
+
+    const prefersReducedMotion = () =>
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // -----------------------------------------
+    // A. RASTRO SUTIL DE POLVO ESTELAR + INTERRUPTOR (SOLO PC)
+    // -----------------------------------------
+    let stardustEnabled = true;
+    let lastSparkTime = 0;
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.type = 'button';
+    toggleBtn.id = 'stardustToggleBtn';
+    toggleBtn.className = 'stardust-toggle-btn';
+    toggleBtn.setAttribute('aria-pressed', 'true');
+    toggleBtn.title = 'Activar o desactivar polvo estelar (Alt + P)';
+    toggleBtn.innerHTML = `
+        <span class="stardust-toggle-icon" aria-hidden="true">✦</span>
+        <span class="stardust-toggle-label">Polvo estelar: ON</span>
+    `;
+
+    function syncStardustToggleUI() {
+        const label = toggleBtn.querySelector('.stardust-toggle-label');
+        toggleBtn.setAttribute('aria-pressed', String(stardustEnabled));
+        if (label) {
+            label.textContent = stardustEnabled ? 'Polvo estelar: ON' : 'Polvo estelar: OFF';
+        }
+    }
+
+    function setStardustState(nextState) {
+        stardustEnabled = Boolean(nextState);
+        syncStardustToggleUI();
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        setStardustState(!stardustEnabled);
+    });
+
+    document.body.appendChild(toggleBtn);
+
+    // Atajo Alt + P sincronizado con el interruptor
+    document.addEventListener('keydown', (e) => {
+        if (e.altKey && e.key.toLowerCase() === 'p') {
+            e.preventDefault();
+            setStardustState(!stardustEnabled);
+        }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!stardustEnabled || !isDesktop() || prefersReducedMotion()) return;
+        if (e.target && e.target.closest('#stardustToggleBtn')) return;
+
+        const now = performance.now();
+        if (now - lastSparkTime < 42) return;
+        lastSparkTime = now;
+
+        const spark = document.createElement('span');
+        spark.className = 'stardust-particle';
+
+        const size = (Math.random() * 3.5 + 2.5).toFixed(1);
+        const driftX = (Math.random() * 18 - 9).toFixed(1);
+        const driftY = (Math.random() * 14 + 6).toFixed(1);
+
+        spark.style.width = `${size}px`;
+        spark.style.height = `${size}px`;
+        spark.style.left = `${e.clientX}px`;
+        spark.style.top = `${e.clientY}px`;
+        spark.style.setProperty('--drift-x', `${driftX}px`);
+        spark.style.setProperty('--drift-y', `${driftY}px`);
+
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 860);
+    }, { passive: true });
+
+    // -----------------------------------------
+    // B. MICRO-TEMBLOR Y TEXTO TEMPORAL EN "NO" (SOLO PC)
+    // -----------------------------------------
+    function setupDesktopDeclineHover() {
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach((radio) => {
+            const label =
+                (radio.id && document.querySelector(`label[for="${radio.id}"]`)) ||
+                radio.closest('label');
+
+            if (!label) return;
+
+            const text = label.textContent.trim().toLowerCase();
+            const val = (radio.value || '').toLowerCase();
+            const isDecline =
+                val.includes('fuerza') ||
+                val.includes('lamentablemente') ||
+                val === 'no' ||
+                text.includes('fuerza no me acompaña') ||
+                text.includes('lamentablemente');
+
+            if (!isDecline) return;
+
+            const targetEl = label.querySelector('span') || label;
+            const originalHTML = targetEl.innerHTML;
+            let resetTimer = null;
+
+            label.addEventListener('mouseenter', () => {
+                if (!isDesktop()) return;
+
+                if (resetTimer) clearTimeout(resetTimer);
+
+                targetEl.classList.remove('rsvp-desktop-nudge');
+                void targetEl.offsetWidth; // Reinicia animación CSS
+                targetEl.classList.add('rsvp-desktop-nudge');
+                targetEl.textContent = '¿Seguro? Piénsalo bien...';
+
+                resetTimer = setTimeout(() => {
+                    targetEl.innerHTML = originalHTML;
+                    targetEl.classList.remove('rsvp-desktop-nudge');
+                }, 1300);
+            });
+        });
+    }
+
+    setupDesktopDeclineHover();
+
+    // -----------------------------------------
+    // C. GUIÑO "JUEGOS DEL HAMBRE" AL CONFIRMAR RSVP
+    // -----------------------------------------
+    function showHungerGamesTribute(isAttending) {
+        let overlay = document.getElementById('hungerGamesTributeToast');
+
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'hungerGamesTributeToast';
+            overlay.className = 'tribute-toast';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            overlay.innerHTML = `
+                <div class="tribute-card">
+                    <div class="tribute-emblem" aria-hidden="true">✦</div>
+                    <span class="tribute-kicker">DISTRITO DEL BANQUETE · CAPITOLIO</span>
+                    <h3 class="tribute-title" id="tributeTitle"></h3>
+                    <p class="tribute-quote" id="tributeQuote"></p>
+                    <button type="button" class="btn-solid" id="closeTributeBtn">
+                        Que la suerte nos acompañe
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay || e.target.id === 'closeTributeBtn') {
+                    overlay.classList.remove('is-visible');
+
+                    if (mockingjayAudio) {
+                        mockingjayAudio.pause();
+                        mockingjayAudio.currentTime = 0;
+                    }
+                }
+            });
+        }
+
+        const titleEl = overlay.querySelector('#tributeTitle');
+        const quoteEl = overlay.querySelector('#tributeQuote');
+        const cardEl = overlay.querySelector('.tribute-card');
+
+        if (isAttending) {
+            titleEl.textContent = '¡Que comiencen los Juegos del Hambre!';
+            quoteEl.textContent =
+                'Tu tributo ha quedado registrado para el gran banquete. Entrena el apetito, prepara tus mejores galas... y que la suerte esté siempre de vuestra parte.';
+            playMockingjayWhistle();
+        } else {
+            titleEl.textContent = 'Tributo retirado de la arena';
+            quoteEl.textContent =
+                'Hemos recibido tu respuesta. Te echaremos de menos en el banquete, pero que la suerte esté siempre de tu parte.';
+        }
+
+        // Genera ascuas doradas ascendentes dentro de la tarjeta
+        if (cardEl && !prefersReducedMotion()) {
+            for (let i = 0; i < 16; i++) {
+                const ember = document.createElement('span');
+                ember.className = 'tribute-spark';
+                ember.style.left = `${Math.random() * 90 + 5}%`;
+                ember.style.animationDelay = `${(Math.random() * 0.7).toFixed(2)}s`;
+                ember.style.setProperty('--ember-x', `${(Math.random() * 50 - 25).toFixed(1)}px`);
+                cardEl.appendChild(ember);
+                setTimeout(() => ember.remove(), 3100);
+            }
+        }
+
+        requestAnimationFrame(() => {
+            overlay.classList.add('is-visible');
+        });
+    }
+
+    // Engancha con el formulario RSVP al enviarse
+    const rsvpForm = document.querySelector('#confirmar form, #rsvp form, form');
+    if (rsvpForm) {
+        rsvpForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Evita que la página se recargue
+
+            const checkedRadio = rsvpForm.querySelector('input[type="radio"]:checked');
+            const val = (checkedRadio?.value || '').toLowerCase();
+            const labelText = (
+                (checkedRadio?.id &&
+                    document.querySelector(`label[for="${checkedRadio.id}"]`)?.textContent) ||
+                checkedRadio?.closest('label')?.textContent ||
+                ''
+            ).toLowerCase();
+
+            const declined =
+                val.includes('fuerza') ||
+                val.includes('lamentablemente') ||
+                val === 'no' ||
+                labelText.includes('fuerza no me acompaña') ||
+                labelText.includes('lamentablemente');
+
+            showHungerGamesTribute(!declined);
+        });
+    }
+
+    const MOCKINGJAY_AUDIO_URL = 'media/audio/sinsajo.mp3'; // Ajusta la ruta si lo pones en otra carpeta
+    let mockingjayAudio = null;
+
+    function playMockingjayWhistle() {
+        try {
+            if (!mockingjayAudio) {
+                mockingjayAudio = new Audio(MOCKINGJAY_AUDIO_URL);
+                mockingjayAudio.volume = 0.75;
+                mockingjayAudio.preload = 'auto';
+            }
+
+            mockingjayAudio.currentTime = 0;
+            const playPromise = mockingjayAudio.play();
+
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {
+                    // Respaldo por si el navegador bloquea o aún no cargó el archivo
+                    playSynthesizedMockingjayWhistle();
+                });
+            }
+        } catch (err) {
+            playSynthesizedMockingjayWhistle();
+
+            console.log(err);
+            
+        }
+    }
+
+    function playSynthesizedMockingjayWhistle() {
+        try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+
+            const ctx = new AudioCtx();
+            const now = ctx.currentTime;
+
+            const notes = [
+                { freq: 392.00, start: 0.0, duration: 0.36 },
+                { freq: 466.16, start: 0.42, duration: 0.36 },
+                { freq: 440.00, start: 0.84, duration: 0.38 },
+                { freq: 293.66, start: 1.30, duration: 0.85 }
+            ];
+
+            notes.forEach((n) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(n.freq, now + n.start);
+
+                gain.gain.setValueAtTime(0.001, now + n.start);
+                gain.gain.exponentialRampToValueAtTime(0.18, now + n.start + 0.06);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + n.start + n.duration);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start(now + n.start);
+                osc.stop(now + n.start + n.duration + 0.05);
+            });
+        } catch (err) {
+            // Silencioso si el dispositivo no permite audio
+        }
+    }
+})();

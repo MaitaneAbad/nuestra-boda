@@ -858,7 +858,290 @@ h2 {
 }
 
 /* =========================================
-   PIE DE PÁGINA Y RESPONSIVE MÓVIL
+   1. RASTRO SUTIL DE POLVO ESTELAR (SOLO ESCRITORIO)
+   ========================================= */
+.stardust-particle {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff8e7 0%, var(--accent-gold, #b89552) 60%, transparent 100%);
+    box-shadow: 0 0 6px rgba(184, 149, 82, 0.55);
+    z-index: 9998;
+    animation: stardustFade 0.85s cubic-bezier(0.22, 0.85, 0.25, 1) forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes stardustFade {
+    0% {
+        opacity: 0.85;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--drift-x, 0px)), calc(-50% + var(--drift-y, 14px))) scale(0.15);
+    }
+}
+
+/* =========================================
+   2. MICRO-TEMBLOR EN OPCIÓN "NO" (ESCRITORIO)
+   ========================================= */
+@keyframes rsvpNudgeShake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-4px) rotate(-0.5deg);
+    }
+    40% {
+        transform: translateX(4px) rotate(0.5deg);
+    }
+    60% {
+        transform: translateX(-3px);
+    }
+    80% {
+        transform: translateX(3px);
+    }
+}
+
+.rsvp-desktop-nudge {
+    display: inline-block;
+    animation: rsvpNudgeShake 0.42s ease-in-out;
+    color: var(--ink-sepia, #4a3b2c);
+    transition: color 0.2s ease;
+}
+
+/* =========================================
+   3. TRIBUTO AL CONFIRMAR ("JUEGOS DEL HAMBRE")
+   ========================================= */
+.tribute-toast {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(36, 29, 24, 0.62);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+}
+
+.tribute-toast.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tribute-card {
+    position: relative;
+    max-width: 460px;
+    width: 100%;
+    background: var(--bg-paper, #fcfaf5);
+    border: 1px solid var(--accent-gold, #b89552);
+    box-shadow: 0 24px 60px rgba(28, 22, 18, 0.35);
+    padding: 36px 28px 30px;
+    text-align: center;
+    transform: scale(0.92) translateY(14px);
+    transition: transform 0.45s cubic-bezier(0.22, 0.85, 0.25, 1);
+    overflow: hidden;
+}
+
+.tribute-toast.is-visible .tribute-card {
+    transform: scale(1) translateY(0);
+}
+
+.tribute-emblem {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent-gold, #b89552);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-gold, #b89552);
+    font-size: 1.7rem;
+    box-shadow: 0 0 18px rgba(184, 149, 82, 0.25);
+    animation: tributePulse 2s ease-in-out infinite;
+}
+
+@keyframes tributePulse {
+    0%,
+    100% {
+        box-shadow: 0 0 12px rgba(184, 149, 82, 0.22);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 26px rgba(184, 149, 82, 0.55);
+        transform: scale(1.04);
+    }
+}
+
+.tribute-kicker {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--accent-gold, #b89552);
+    margin-bottom: 8px;
+}
+
+.tribute-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+    color: var(--ink-sepia, #4a3b2c);
+    margin-bottom: 10px;
+}
+
+.tribute-quote {
+    font-size: 0.95rem;
+    color: var(--ink-dark, #2c241e);
+    line-height: 1.65;
+    margin-bottom: 22px;
+}
+
+.tribute-spark {
+    position: absolute;
+    bottom: -10px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent-gold, #b89552);
+    pointer-events: none;
+    animation: emberRise 2.4s ease-out forwards;
+}
+
+@keyframes emberRise {
+    0% {
+        opacity: 0.9;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-220px) translateX(var(--ember-x, 0px)) scale(0.2);
+    }
+}
+
+.tribute-emblem {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent-gold, #b89552);
+    background: radial-gradient(circle, rgba(184, 149, 82, 0.12) 0%, transparent 72%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-gold, #b89552);
+    box-shadow: 0 0 18px rgba(184, 149, 82, 0.25);
+    animation: tributePulse 2.4s ease-in-out infinite;
+    overflow: visible;
+}
+
+.mockingjay-svg {
+    width: 52px;
+    height: 52px;
+    overflow: visible;
+}
+
+/* Animación de despliegue de alas al abrir el modal */
+.mockingjay-wing-left {
+    transform-origin: 50px 56px;
+    animation: spreadWingLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.mockingjay-wing-right {
+    transform-origin: 50px 56px;
+    animation: spreadWingRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes spreadWingLeft {
+    0% {
+        transform: rotate(38deg) scale(0.75);
+        opacity: 0.4;
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes spreadWingRight {
+    0% {
+        transform: rotate(-38deg) scale(0.75);
+        opacity: 0.4;
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes tributePulse {
+    0%,
+    100% {
+        box-shadow: 0 0 14px rgba(184, 149, 82, 0.25);
+    }
+    50% {
+        box-shadow: 0 0 28px rgba(184, 149, 82, 0.6);
+    }
+}
+
+/* =========================================
+   INTERRUPTOR DISCRETO POLVO ESTELAR (SOLO PC)
+   ========================================= */
+.stardust-toggle-btn {
+    display: none;
+}
+
+@media (pointer: fine) and (min-width: 769px) {
+    .stardust-toggle-btn {
+        position: fixed;
+        right: 26px;
+        bottom: 26px;
+        z-index: 60;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(184, 149, 82, 0.45);
+        background: rgba(252, 250, 245, 0.88);
+        color: var(--ink-sepia, #4a3b2c);
+        font-family: var(--font-body);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(44, 36, 30, 0.1);
+        backdrop-filter: blur(4px);
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            border-color 0.25s ease;
+    }
+
+    .stardust-toggle-btn:hover {
+        transform: translateY(-1px);
+        border-color: var(--accent-gold, #b89552);
+    }
+
+    .stardust-toggle-btn[aria-pressed='false'] {
+        opacity: 0.55;
+    }
+
+    .stardust-toggle-icon {
+        color: var(--accent-gold, #b89552);
+        font-size: 0.82rem;
+        line-height: 1;
+    }
+}
+
+/* =========================================
+   PIE DE PÁGINA
    ========================================= */
 footer {
     text-align: center;
@@ -869,6 +1152,9 @@ footer {
     color: var(--ink-muted);
 }
 
+/* =========================================
+   RESPONSIVE MÓVIL
+   ========================================= */
 @media (max-width: 640px) {
     .page-frame {
         inset: 8px;

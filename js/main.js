@@ -273,23 +273,23 @@ companionRadios.forEach((radio) => {
 // =========================================
 
 function isMobileOrTabletView() {
-        const ua = navigator.userAgent || '';
-        const platform = navigator.platform || '';
-        const maxTouch = navigator.maxTouchPoints || 0;
+    const ua = navigator.userAgent || '';
+    const platform = navigator.platform || '';
+    const maxTouch = navigator.maxTouchPoints || 0;
 
-        // Detecta iPhone, iPod, iPad (incluidos iPadOS modernos con MacIntel + touch) y Android/móviles/tablets
-        const isAppleMobileOrTablet =
-            /iPhone|iPod|iPad/i.test(ua) ||
-            (platform === 'MacIntel' && maxTouch > 1);
+    // Detecta iPhone, iPod, iPad (incluidos iPadOS modernos con MacIntel + touch) y Android/móviles/tablets
+    const isAppleMobileOrTablet =
+        /iPhone|iPod|iPad/i.test(ua) ||
+        (platform === 'MacIntel' && maxTouch > 1);
 
-        const isAndroidOrMobileUA =
-            /Android|webOS|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet/i.test(ua);
+    const isAndroidOrMobileUA =
+        /Android|webOS|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet/i.test(ua);
 
-        const hasCoarsePointer =
-            window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    const hasCoarsePointer =
+        window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
 
-        return (isAppleMobileOrTablet || isAndroidOrMobileUA) && (hasCoarsePointer || maxTouch > 0);
-    }
+    return (isAppleMobileOrTablet || isAndroidOrMobileUA) && (hasCoarsePointer || maxTouch > 0);
+}
 
 (function () {
     const modal = document.getElementById('forceEasterEggModal');
@@ -590,128 +590,12 @@ function isMobileOrTabletView() {
     setupDesktopDeclineHover();
 
     // -----------------------------------------
-    // C. GUIÑO "JUEGOS DEL HAMBRE" AL CONFIRMAR RSVP
+    // C. GUIÑO "JUEGOS DEL HAMBRE": AUDIO + GIF DEL SINSAJO
     // -----------------------------------------
-    function showHungerGamesTribute(isAttending) {
-        let overlay = document.getElementById('hungerGamesTributeToast');
+    const MOCKINGJAY_AUDIO_URL = 'media/audio/sinsajo.mp3'; // Verifica que exista en esta ruta
+    const MOCKINGJAY_GIF_URL = 'media/img/sinsajo.gif';
 
-        if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.id = 'hungerGamesTributeToast';
-            overlay.className = 'tribute-toast';
-            overlay.setAttribute('role', 'dialog');
-            overlay.setAttribute('aria-modal', 'true');
-            overlay.innerHTML = `
-                <div class="tribute-card">
-                    <div class="tribute-emblem" aria-hidden="true">✦</div>
-                    <span class="tribute-kicker">DISTRITO DEL BANQUETE · CAPITOLIO</span>
-                    <h3 class="tribute-title" id="tributeTitle"></h3>
-                    <p class="tribute-quote" id="tributeQuote"></p>
-                    <button type="button" class="btn-solid" id="closeTributeBtn">
-                        Que la suerte nos acompañe
-                    </button>
-                </div>
-            `;
-            document.body.appendChild(overlay);
-
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay || e.target.id === 'closeTributeBtn') {
-                    overlay.classList.remove('is-visible');
-
-                    if (mockingjayAudio) {
-                        mockingjayAudio.pause();
-                        mockingjayAudio.currentTime = 0;
-                    }
-                }
-            });
-        }
-
-        const titleEl = overlay.querySelector('#tributeTitle');
-        const quoteEl = overlay.querySelector('#tributeQuote');
-        const cardEl = overlay.querySelector('.tribute-card');
-
-        if (isAttending) {
-            titleEl.textContent = '¡Que comiencen los Juegos del Hambre!';
-            quoteEl.textContent =
-                'Tu tributo ha quedado registrado para el gran banquete. Entrena el apetito, prepara tus mejores galas... y que la suerte esté siempre de vuestra parte.';
-            playMockingjayWhistle();
-        } else {
-            titleEl.textContent = 'Tributo retirado de la arena';
-            quoteEl.textContent =
-                'Hemos recibido tu respuesta. Te echaremos de menos en el banquete, pero que la suerte esté siempre de tu parte.';
-        }
-
-        // Genera ascuas doradas ascendentes dentro de la tarjeta
-        if (cardEl && !prefersReducedMotion()) {
-            for (let i = 0; i < 16; i++) {
-                const ember = document.createElement('span');
-                ember.className = 'tribute-spark';
-                ember.style.left = `${Math.random() * 90 + 5}%`;
-                ember.style.animationDelay = `${(Math.random() * 0.7).toFixed(2)}s`;
-                ember.style.setProperty('--ember-x', `${(Math.random() * 50 - 25).toFixed(1)}px`);
-                cardEl.appendChild(ember);
-                setTimeout(() => ember.remove(), 3100);
-            }
-        }
-
-        requestAnimationFrame(() => {
-            overlay.classList.add('is-visible');
-        });
-    }
-
-    // Engancha con el formulario RSVP al enviarse
-    const rsvpForm = document.querySelector('#confirmar form, #rsvp form, form');
-    if (rsvpForm) {
-        rsvpForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Evita que la página se recargue
-
-            const checkedRadio = rsvpForm.querySelector('input[type="radio"]:checked');
-            const val = (checkedRadio?.value || '').toLowerCase();
-            const labelText = (
-                (checkedRadio?.id &&
-                    document.querySelector(`label[for="${checkedRadio.id}"]`)?.textContent) ||
-                checkedRadio?.closest('label')?.textContent ||
-                ''
-            ).toLowerCase();
-
-            const declined =
-                val.includes('fuerza') ||
-                val.includes('lamentablemente') ||
-                val === 'no' ||
-                labelText.includes('fuerza no me acompaña') ||
-                labelText.includes('lamentablemente');
-
-            showHungerGamesTribute(!declined);
-        });
-    }
-
-    const MOCKINGJAY_AUDIO_URL = 'media/audio/sinsajo.mp3'; // Ajusta la ruta si lo pones en otra carpeta
     let mockingjayAudio = null;
-
-    function playMockingjayWhistle() {
-        try {
-            if (!mockingjayAudio) {
-                mockingjayAudio = new Audio(MOCKINGJAY_AUDIO_URL);
-                mockingjayAudio.volume = 0.75;
-                mockingjayAudio.preload = 'auto';
-            }
-
-            mockingjayAudio.currentTime = 0;
-            const playPromise = mockingjayAudio.play();
-
-            if (playPromise && typeof playPromise.catch === 'function') {
-                playPromise.catch(() => {
-                    // Respaldo por si el navegador bloquea o aún no cargó el archivo
-                    playSynthesizedMockingjayWhistle();
-                });
-            }
-        } catch (err) {
-            playSynthesizedMockingjayWhistle();
-
-            console.log(err);
-            
-        }
-    }
 
     function playSynthesizedMockingjayWhistle() {
         try {
@@ -719,8 +603,11 @@ function isMobileOrTabletView() {
             if (!AudioCtx) return;
 
             const ctx = new AudioCtx();
-            const now = ctx.currentTime;
+            if (ctx.state === 'suspended') {
+                ctx.resume();
+            }
 
+            const now = ctx.currentTime;
             const notes = [
                 { freq: 392.00, start: 0.0, duration: 0.36 },
                 { freq: 466.16, start: 0.42, duration: 0.36 },
@@ -746,7 +633,150 @@ function isMobileOrTabletView() {
                 osc.stop(now + n.start + n.duration + 0.05);
             });
         } catch (err) {
-            // Silencioso si el dispositivo no permite audio
+            console.warn('No se pudo reproducir el silbido sintetizado:', err);
         }
+    }
+
+    function playMockingjayWhistle() {
+        try {
+            if (!mockingjayAudio) {
+                mockingjayAudio = new Audio(MOCKINGJAY_AUDIO_URL);
+                mockingjayAudio.volume = 0.85;
+                mockingjayAudio.preload = 'auto';
+            }
+
+            mockingjayAudio.currentTime = 0;
+            const playPromise = mockingjayAudio.play();
+
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch((err) => {
+                    console.warn('Fallo al reproducir MP3, usando respaldo sintetizado:', err);
+                    playSynthesizedMockingjayWhistle();
+                });
+            }
+        } catch (err) {
+            console.warn('Error iniciando audio:', err);
+            playSynthesizedMockingjayWhistle();
+        }
+    }
+
+    function stopMockingjayAudio() {
+        if (mockingjayAudio) {
+            mockingjayAudio.pause();
+            mockingjayAudio.currentTime = 0;
+        }
+    }
+
+    function showHungerGamesTribute(isAttending) {
+        let overlay = document.getElementById('hungerGamesTributeToast');
+
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'hungerGamesTributeToast';
+            overlay.className = 'tribute-toast';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            overlay.innerHTML = `
+                <div class="tribute-card">
+                    <div class="tribute-media-frame" id="tributeMediaFrame">
+                        <img
+                            id="tributeGif"
+                            class="tribute-gif"
+                            src=""
+                            alt="Emblema del Sinsajo de Los Juegos del Hambre"
+                        />
+                    </div>
+                    <span class="tribute-kicker">DISTRITO DEL BANQUETE · CAPITOLIO</span>
+                    <h3 class="tribute-title" id="tributeTitle"></h3>
+                    <p class="tribute-quote" id="tributeQuote"></p>
+                    <button type="button" class="btn-solid" id="closeTributeBtn">
+                        Que la suerte nos acompañe
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay || e.target.id === 'closeTributeBtn') {
+                    overlay.classList.remove('is-visible');
+                    stopMockingjayAudio();
+                }
+            });
+        }
+
+        const mediaFrameEl = overlay.querySelector('#tributeMediaFrame');
+        const gifEl = overlay.querySelector('#tributeGif');
+        const titleEl = overlay.querySelector('#tributeTitle');
+        const quoteEl = overlay.querySelector('#tributeQuote');
+        const cardEl = overlay.querySelector('.tribute-card');
+
+        if (isAttending) {
+            titleEl.textContent = '¡Que comiencen los Juegos del Hambre!';
+            quoteEl.textContent =
+                'Tu tributo ha quedado registrado para el gran banquete. Entrena el apetito, prepara tus mejores galas... y que la suerte esté siempre de vuestra parte.';
+
+            if (mediaFrameEl && gifEl) {
+                mediaFrameEl.hidden = false;
+                gifEl.src = `${MOCKINGJAY_GIF_URL}?t=${Date.now()}`;
+            }
+
+            playMockingjayWhistle();
+        } else {
+            titleEl.textContent = 'Tributo retirado de la arena';
+            quoteEl.textContent =
+                'Hemos recibido tu respuesta. Te echaremos de menos en el banquete, pero que la suerte esté siempre de tu parte.';
+
+            stopMockingjayAudio();
+
+            if (mediaFrameEl) {
+                mediaFrameEl.hidden = true;
+            }
+            if (gifEl) {
+                gifEl.src = '';
+            }
+        }
+
+        // Genera ascuas doradas ascendentes dentro de la tarjeta
+        if (cardEl && !prefersReducedMotion()) {
+            for (let i = 0; i < 16; i++) {
+                const ember = document.createElement('span');
+                ember.className = 'tribute-spark';
+                ember.style.left = `${Math.random() * 90 + 5}%`;
+                ember.style.animationDelay = `${(Math.random() * 0.7).toFixed(2)}s`;
+                ember.style.setProperty('--ember-x', `${(Math.random() * 50 - 25).toFixed(1)}px`);
+                cardEl.appendChild(ember);
+                setTimeout(() => ember.remove(), 3100);
+            }
+        }
+
+        requestAnimationFrame(() => {
+            overlay.classList.add('is-visible');
+        });
+    }
+
+    // Engancha con el formulario RSVP al enviarse
+    const rsvpForm = document.querySelector('#confirmar form, #rsvp form, form');
+    if (rsvpForm) {
+        rsvpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const checkedRadio = rsvpForm.querySelector('input[type="radio"]:checked');
+            const val = (checkedRadio?.value || '').toLowerCase();
+            const labelText = (
+                (checkedRadio?.id &&
+                    document.querySelector(`label[for="${checkedRadio.id}"]`)?.textContent) ||
+                checkedRadio?.closest('label')?.textContent ||
+                ''
+            ).toLowerCase();
+
+            const declined =
+                val.includes('fuerza') ||
+                val.includes('lamentablemente') ||
+                val === 'no' ||
+                labelText.includes('fuerza no me acompaña') ||
+                labelText.includes('lamentablemente');
+
+            showHungerGamesTribute(!declined);
+        });
     }
 })();

@@ -954,33 +954,6 @@ h2 {
     transform: scale(1) translateY(0);
 }
 
-.tribute-emblem {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 14px;
-    border-radius: 50%;
-    border: 1.5px solid var(--accent-gold, #b89552);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--accent-gold, #b89552);
-    font-size: 1.7rem;
-    box-shadow: 0 0 18px rgba(184, 149, 82, 0.25);
-    animation: tributePulse 2s ease-in-out infinite;
-}
-
-@keyframes tributePulse {
-    0%,
-    100% {
-        box-shadow: 0 0 12px rgba(184, 149, 82, 0.22);
-        transform: scale(1);
-    }
-    50% {
-        box-shadow: 0 0 26px rgba(184, 149, 82, 0.55);
-        transform: scale(1.04);
-    }
-}
-
 .tribute-kicker {
     display: block;
     font-size: 0.72rem;
@@ -1015,6 +988,28 @@ h2 {
     animation: emberRise 2.4s ease-out forwards;
 }
 
+.tribute-media-frame {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto 16px;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1.5px solid var(--accent-gold, #b89552);
+    box-shadow:
+        0 10px 26px rgba(44, 36, 30, 0.22),
+        0 0 18px rgba(184, 149, 82, 0.2);
+    background: #1b1511;
+}
+
+.tribute-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 @keyframes emberRise {
     0% {
         opacity: 0.9;
@@ -1023,71 +1018,6 @@ h2 {
     100% {
         opacity: 0;
         transform: translateY(-220px) translateX(var(--ember-x, 0px)) scale(0.2);
-    }
-}
-
-.tribute-emblem {
-    width: 76px;
-    height: 76px;
-    margin: 0 auto 14px;
-    border-radius: 50%;
-    border: 1.5px solid var(--accent-gold, #b89552);
-    background: radial-gradient(circle, rgba(184, 149, 82, 0.12) 0%, transparent 72%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--accent-gold, #b89552);
-    box-shadow: 0 0 18px rgba(184, 149, 82, 0.25);
-    animation: tributePulse 2.4s ease-in-out infinite;
-    overflow: visible;
-}
-
-.mockingjay-svg {
-    width: 52px;
-    height: 52px;
-    overflow: visible;
-}
-
-/* Animación de despliegue de alas al abrir el modal */
-.mockingjay-wing-left {
-    transform-origin: 50px 56px;
-    animation: spreadWingLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.mockingjay-wing-right {
-    transform-origin: 50px 56px;
-    animation: spreadWingRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes spreadWingLeft {
-    0% {
-        transform: rotate(38deg) scale(0.75);
-        opacity: 0.4;
-    }
-    100% {
-        transform: rotate(0deg) scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes spreadWingRight {
-    0% {
-        transform: rotate(-38deg) scale(0.75);
-        opacity: 0.4;
-    }
-    100% {
-        transform: rotate(0deg) scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes tributePulse {
-    0%,
-    100% {
-        box-shadow: 0 0 14px rgba(184, 149, 82, 0.25);
-    }
-    50% {
-        box-shadow: 0 0 28px rgba(184, 149, 82, 0.6);
     }
 }
 

@@ -1,0 +1,118 @@
+/* =========================================
+   EASTER EGG DOOM MODAL
+   ========================================= */
+.doom-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10005;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(18, 14, 11, 0.78);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.28s ease,
+        visibility 0.28s ease;
+}
+
+.doom-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.doom-window {
+    width: 100%;
+    max-width: 720px;
+    background: #14110f;
+    border: 1.5px solid var(--accent-gold, #b89552);
+    border-radius: 8px;
+    box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.6),
+        0 0 24px rgba(184, 149, 82, 0.22);
+    overflow: hidden;
+    color: var(--bg-paper, #fcfaf5);
+}
+
+.doom-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: rgba(184, 149, 82, 0.14);
+    border-bottom: 1px solid rgba(184, 149, 82, 0.35);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--accent-gold, #b89552);
+}
+
+.doom-close-btn {
+    background: transparent;
+    border: 1px solid rgba(184, 149, 82, 0.5);
+    color: var(--bg-paper, #fcfaf5);
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.doom-close-btn:hover {
+    background: rgba(184, 149, 82, 0.25);
+}
+
+.doom-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: #090706;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.doom-stage iframe,
+.doom-stage canvas {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+.doom-footer {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    color: rgba(252, 250, 245, 0.72);
+    border-top: 1px solid rgba(184, 149, 82, 0.2);
+    text-align: center;
+}
+
+.doom-hud {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    right: 12px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    font-family: monospace, sans-serif;
+    font-size: 0.78rem;
+    color: var(--accent-gold, #b89552);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.doom-crosshair {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(252, 250, 245, 0.65);
+    font-family: monospace, sans-serif;
+    font-size: 1rem;
+}
